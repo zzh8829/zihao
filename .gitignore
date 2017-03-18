@@ -1,1 +1,3 @@
 public/
+themes/*
+!themes/cactus-plus

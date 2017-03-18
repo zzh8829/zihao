@@ -1,0 +1,22 @@
+languageCode: en-us
+title: Zihao Zhang
+baseURL: "/"
+canonifyurls: true
+theme: casper
+Copyright: All rights reserved - 2017
+params:
+  description: hello
+  author: Zihao Zhang
+  authorwebsite: https://zihao.me
+  bio: Hello
+  disqusShortname: zihaosblog
+  logo: favicon.ico
+  githubName: zzh8829
+  twitterName: zzh8829
+  facebookName: zihao.pro.zhang
+  linkedinName: zzh8829
+  hideHUGOSupport: false
+  social:
+    twitter: zzh8829
+indexes:
+  category: categories
