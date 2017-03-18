@@ -1,22 +1,43 @@
-languageCode: en-us
-title: Zihao Zhang
-baseURL: "/"
-canonifyurls: true
-theme: casper
-Copyright: All rights reserved - 2017
+# baseURL:                    https://zihao.me
+# canonifyURLs:               true
+baseUrl: /
+defaultContentLanguage: en
+enableEmoji:                true
+googleAnalytics:            UA-62762041-1
+languageCode:               en-us
+# permalinks: what
+# sitemap: sitemap.xml
+theme:                      cactus-plus
+title:                      Zihao Zhang
+# hasCJKLanguage:             true
+
 params:
-  description: hello
-  author: Zihao Zhang
-  authorwebsite: https://zihao.me
-  bio: Hello
+  name: Zihao Zhang
+  description: Runing myself like a Startup
+  bio: Runing myself like a Startup
+  twitter: zzh8829
+  enableRSS: true
   disqusShortname: zihaosblog
-  logo: favicon.ico
-  githubName: zzh8829
-  twitterName: zzh8829
-  facebookName: zihao.pro.zhang
-  linkedinName: zzh8829
-  hideHUGOSupport: false
-  social:
-    twitter: zzh8829
-indexes:
-  category: categories
+  # enableDisqus: true
+  # enableGoogleAnalytics: true
+  customCSS:
+  - css/zihao.css
+  # home: ""
+  # about: ""
+  # archive: ""
+  # subscribe: ""
+  # olderPosts: ""
+  # newerPosts: ""
+  # readMore: ""
+  copyright: Copyright 2017 Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="height:1em;width:auto;border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> 
+  # aboutAuthor: 'I am so interesting.'
+  # tweet: ""
+  # share: ""
+  # title404: ""
+  # subtitle404: ""
+  iconFont: font-awesome
+social:
+  facebook-square: https://facebook.com/zihao.pro.zhang
+  twitter-square: https://twitter.com/zzh8829
+  github-square: https://github.com/zzh8829
+

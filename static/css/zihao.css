@@ -1,0 +1,16 @@
+#wrapper {
+    max-width: 800px;
+}
+
+#wrapper.home {
+    max-width: 800px;
+}
+
+#footer {
+  border-top: 1px solid rgba(0,0,0,.05);
+}
+
+#demo {
+  height:100vh;
+  background-color: rgb(200,200,200);
+}

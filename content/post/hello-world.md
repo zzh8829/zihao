@@ -6,3 +6,11 @@ draft = false
 
 +++
 
+Hugo is great
+
+```python
+def hello():
+  print 'hello'
+```
+
+Thanks

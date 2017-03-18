@@ -1,0 +1,13 @@
+<footer id="footer">
+    {{ if .Site.Social }}
+        {{ partial "social.html" . }}
+    {{ end }}
+    <p class="small">
+    {{ .Site.Params.copyright | markdownify }}
+    </p>
+    <p class="small">
+        Frontend powered by Three.js, <a href="http://www.gohugo.io/">Hugo</a>, <a href="http://nodejh.com">nodejh</a> <br/>
+        Backend powered by Gitlab Pages, Docker, Elixir, Pheoix <br/>
+        Server powered by Kubernetes on Linode, AWS, DigitalOcean.
+    </p>
+</footer>
