@@ -1,0 +1,28 @@
+languageCode = "en-us"
+title = "Zihao Zhang"
+baseURL = "/"
+canonifyurls  = true
+theme = "casper"
+Copyright = "All rights reserved - 2017"
+
+[params]
+  description = "hello"
+  # cover = "images/cover.jpg"
+  author = "Zihao Zhang"
+  # authorlocation = ""
+  authorwebsite = "https://zihao.me"
+  bio= "Hello"
+  disqusShortname = "zihaosblog"
+  logo = "favicon.ico"
+  # googleAnalyticsUserID = ""
+  # RSSLink = "http://feeds.feedburner.com/..."
+  githubName = "zzh8829"
+  twitterName = "zzh8829"
+  facebookName = "zihao.pro.zhang"
+  linkedinName = "zzh8829"
+  hideHUGOSupport = false
+  [params.social]
+    twitter = "zzh8829"
+
+[indexes]
+  category  = "categories"
