@@ -1,8 +1,4 @@
-image: debian:jessie
-
-before_script:
-  - apt-get update && apt-get install -yq hugo
-  - hugo version
+image: publysher/hugo
 
 test:
   script:
