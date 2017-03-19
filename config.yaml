@@ -16,7 +16,7 @@ params:
   description: Runing myself like a Startup
   bio: Runing myself like a Startup
   twitter: zzh8829
-  # enableRSS: true
+  enableRSS: true
   disqusShortname: zihaosblog
   enableDisqus: true
   enableGoogleAnalytics: true

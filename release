@@ -1,13 +1,14 @@
 #!/bin/bash 
-
+set -e
 rm -rf public
 hugo
-rm -rf gitlab
-git clone git@gitlab.com:zzh8829/zihao-pages.git gitlab
-rm -rf gitlab/*
-cp -r gitlab-pages/. gitlab/
-mv public gitlab/
-cd gitlab
+TMP=$(mktemp -d)
+git clone git@gitlab.com:zzh8829/zihao-pages.git $TMP
+rm -rf $TMP/*
+cp -r gitlab-pages/. $TMP/
+mv public $TMP/
+cd $TMP
 git add .
-git commit -m "Update pages $(date)"
+git commit -m "Update Pages $(date)"
 git push origin master
+rm -rf $TMP

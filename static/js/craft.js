@@ -114,7 +114,7 @@
 
   const blocks = {};
 
-  const socket = io.connect("https://craft.kube.zihao.ca");
+  const socket = io.connect("https://nodecraft.kube.zihao.ca");
   socket.on('init', (data) => {
     serverClearBlocks();
     for (const pos of Object.keys(data)) {
