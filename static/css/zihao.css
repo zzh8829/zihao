@@ -1,9 +1,13 @@
-#wrapper {
+.wrapper {
     max-width: 800px;
 }
 
-#wrapper.home {
+.wrapper.home {
     max-width: 800px;
+}
+
+.wrapper:first-of-type {
+  padding-top: 100px;
 }
 
 #footer {
