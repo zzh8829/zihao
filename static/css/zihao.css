@@ -1,3 +1,45 @@
+#demo {
+  height:100vh;
+  background-color: rgb(240,240,240);
+  user-select: none;
+}
+
+nav.main-nav {
+    padding: 5px 60px;
+    width:100%;
+    position: fixed;
+    display: flex;
+    justify-content:flex-end;
+}
+
+nav.main-nav a {
+    font-size: 0.9em;
+    line-height: 1;
+}
+
+nav.main-nav a.nav-logo {
+  margin-right:auto;
+}
+
+nav.main-nav a.cta {
+  background-color: rgba(91,173,240, 0.6);
+}
+
+@media screen and (max-width: 768px) {
+    nav.main-nav {
+      padding-right: 15px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+  nav.main-nav a.nav-logo{
+    display: none;
+  }
+  nav.main-nav a.cta {
+    display: none;
+  }
+}
+
 .wrapper {
     max-width: 800px;
 }
@@ -14,39 +56,6 @@
   border-top: 1px solid rgba(0,0,0,.05);
 }
 
-#demo {
-  height:100vh;
-  background-color: rgb(233,233,233);
-}
-
-nav.main-nav {
-    padding: 8px 60px;
-    width:100%;
-    position: fixed;
-    display: flex;
-    justify-content:flex-end;
-}
-
-@media screen and (max-width: 768px) {
-    nav.main-nav {
-      padding-right: 15px;
-    }
-}
-
-nav.main-nav a.nav-logo {
-  margin-right:auto;
-}
-
-@media screen and (max-width: 768px) {
-    nav.main-nav a.nav-logo{
-      display: none;
-    }
-}
-
-nav.main-nav a.cta {
-  background-color: rgba(91,173,240, 0.6);
-}
-
 .scroll-down {
   opacity: 1;
   transition: all .5s ease-in 3s;
@@ -60,7 +69,7 @@ nav.main-nav a.cta {
   display: block;
   width: 3em;
   height: 3em;
-  border: 2px solid #FFF;
+  border: 2px solid #555;
   background-size: 14px auto;
   border-radius: 50%;
   z-index: 2;
@@ -69,16 +78,16 @@ nav.main-nav a.cta {
 }
 
 .scroll-down:before {
-    position: absolute;
-    top: calc(50% - 8px);
-    left: calc(50% - 6px);
-    transform: rotate(-45deg);
-    display: block;
-    width: 12px;
-    height: 12px;
-    content: "";
-    border: 2px solid white;
-    border-width: 0px 0 2px 2px;
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(50% - 6px);
+  transform: rotate(-45deg);
+  display: block;
+  width: 12px;
+  height: 12px;
+  content: "";
+  border: 2px solid #555;
+  border-width: 0px 0 2px 2px;
 }
 
 @keyframes bounce {

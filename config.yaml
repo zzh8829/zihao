@@ -5,16 +5,15 @@ defaultContentLanguage: en
 enableEmoji:                true
 googleAnalytics:            UA-62762041-1
 languageCode:               en-us
-# permalinks: what
-# sitemap: sitemap.xml
+# permalinks: maybe
 theme:                      cactus-plus
 title:                      Zihao Zhang
 # hasCJKLanguage:             true
 
 params:
   name: Zihao Zhang
-  description: Runing myself like a Startup
-  bio: Runing myself like a Startup
+  description: Running myself like a Startup
+  bio: Running myself like a Startup
   twitter: zzh8829
   enableRSS: true
   disqusShortname: zihaosblog
@@ -36,6 +35,7 @@ params:
   # title404: ""
   # subtitle404: ""
   iconFont: font-awesome
+  staticPages: About Tags
 social:
   facebook-square: https://facebook.com/zihao.pro.zhang
   twitter-square: https://twitter.com/zzh8829

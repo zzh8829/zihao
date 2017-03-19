@@ -15,11 +15,11 @@
     Frontend:
       Hugo, nodejh, Three.js, jQuery, Font Awesome, highlights.js
     Backend:
-      Kubernetes, Docker, Elixir, Phoenix
+      Kubernetes, Nginx, Elixir, Phoenix
     Server:
-      GitLab Pages, Nginx, Linode, AWS, DigitalOcean, cdnjs
-    Operations:
-      GitLab Registry, GitLab CI, LetsEncrypt, Namecheap
+      GitLab Pages, Linode, AWS, DigitalOcean, CDNJS
     Other:
+      Docker, Github, LetsEncrypt, Namecheap
+    Tools:
       Sublime Text, ZShell, GitHub, scm_breeze, 
  

@@ -102,14 +102,15 @@
 
   window.addEventListener('resize', onWindowResize, false);
 
-  document.addEventListener('mousemove', onDocumentMouseMove, false);
-  renderer.domElement.addEventListener('mousedown', onDocumentMouseDown, false);
+  $('#demo').on('mousemove', onDocumentMouseMove);
+  $('#demo').on('mousedown', onDocumentMouseDown);
   // renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
   // renderer.domElement.addEventListener( 'touchend', onDocumentTouchEnd, false);
-  document.addEventListener('keydown', onDocumentKeyDown, false);
-  document.addEventListener('keyup', onDocumentKeyUp, false);
+  $(document).on('keydown', onDocumentKeyDown);
+  $(document).on('keypress', onDocumentKeyPress);
+  $(document).on('keyup', onDocumentKeyUp);
 
-  document.body.appendChild(stats.domElement);
+  $('body').append(stats.domElement);
   $("#demo").append(renderer.domElement);
 
   const blocks = {};
@@ -134,12 +135,17 @@
   animate();
 
   function onDocumentMouseMove(event) {
-    mouse.set((event.clientX / width) * 2 - 1, - (event.clientY / height) * 2 + 1);
+    var x = event.pageX - $('#demo').offset().left;
+    var y = event.pageY - $('#demo').offset().top;
+
+    mouse.set((x / width) * 2 - 1, - (y / height) * 2 + 1);
   }
 
   function onDocumentMouseDown(event) {
-    mouse.set((event.clientX / width) * 2 - 1, - (event.clientY / height) * 2 + 1);
+    var x = event.pageX - $('#demo').offset().left;
+    var y = event.pageY - $('#demo').offset().top;
 
+    mouse.set((x / width) * 2 - 1, - (y / height) * 2 + 1);
     raycaster.setFromCamera(mouse, camera);
 
     const intersects = raycaster.intersectObjects(objects);
@@ -214,6 +220,18 @@
       case 'D':
         autoRotate = false;
         break;
+      default:
+    }
+  }
+
+  function onDocumentKeyPress(event) {
+    const code = event.which || event.keyCode;
+    let char = String.fromCharCode(code);
+
+    keysdown[code] = true;
+
+    char = char.toUpperCase();
+    switch (char) {
       case 'Q':
         if (stats.domElement.style.visibility === 'hidden') {
           stats.domElement.style.visibility = 'visible';
@@ -228,6 +246,10 @@
       case 'G':
         generateMap();
         break;
+      case ' ':
+        autoRotate = !autoRotate;
+        event.preventDefault();
+        break;
       default:
     }
   }
@@ -237,13 +259,6 @@
     const char = String.fromCharCode(code);
 
     keysdown[code] = false;
-
-    switch (char) {
-      case ' ':
-        autoRotate = !autoRotate;
-        break;
-      default:
-    }
   }
 
   function animate() {
