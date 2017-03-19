@@ -12,5 +12,83 @@
 
 #demo {
   height:100vh;
-  background-color: rgb(200,200,200);
+  background-color: rgb(233,233,233);
+}
+
+nav.main-nav {
+    padding: 8px 60px;
+    width:100%;
+    position: fixed;
+    display: flex;
+    justify-content:flex-end;
+}
+
+@media screen and (max-width: 768px) {
+    nav.main-nav {
+      padding-right: 15px;
+    }
+}
+
+nav.main-nav a.nav-left {
+  margin-right:auto;
+}
+
+@media screen and (max-width: 768px) {
+    nav.main-nav a.nav-left{
+      display: none;
+    }
+}
+
+nav.main-nav a.cta {
+  background-color: rgba(91,173,240, 0.6);
+}
+
+.scroll-down {
+  opacity: 1;
+  transition: all .5s ease-in 3s;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -16px;
+  display: block;
+  width: 3em;
+  height: 3em;
+  border: 2px solid #FFF;
+  background-size: 14px auto;
+  border-radius: 50%;
+  z-index: 2;
+  animation: bounce 2s infinite;
+  transition: all .2s ease-in;
+}
+
+.scroll-down:before {
+    position: absolute;
+    top: calc(50% - 8px);
+    left: calc(50% - 6px);
+    transform: rotate(-45deg);
+    display: block;
+    width: 12px;
+    height: 12px;
+    content: "";
+    border: 2px solid white;
+    border-width: 0px 0 2px 2px;
+}
+
+@keyframes bounce {
+  0%,
+  100%,
+  20%,
+  50%,
+  80% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }

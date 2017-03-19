@@ -6,7 +6,7 @@
 
     <h1>.</h1>
 
-    <a href="#header"><span></span>Scroll</a>
+    <a href="#header" class="scroll-down"></a>
     </div>
 
     {{ partial "profile.html" . }}
@@ -26,6 +26,43 @@
             $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 300);
         });
     });
+
+    var homenav = $('#home-nav');
+    var blognav = $('#blog-nav');
+
+    if(homenav.length) {
+        if(window.location.hash) {
+            homenav.hide();
+        } else {
+            blognav.hide();
+        }
+
+        var scrolling = false;
+        var scrollAtBlog = false;
+
+        $(window).scroll(function () {
+          return scrolling = true;
+        });
+
+        setInterval(function () {
+          if (scrolling) {
+            scrolling = false;
+            if ($(window).scrollTop() > 150) {
+              if (!scrollAtBlog) {
+                scrollAtBlog = true;
+                homenav.hide();
+                blognav.show();
+              }
+            } else {
+              if (scrollAtBlog) {
+                scrollAtBlog = false;
+                blognav.hide();
+                homenav.show();
+              }
+            }
+          }
+        }, 100);
+    }
     </script>
     </body>
 </html>
