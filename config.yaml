@@ -1,6 +1,6 @@
-# baseURL:                    https://zihao.me
-# canonifyURLs:               true
-baseUrl: /
+baseURL:                    https://zihao.me/
+canonifyURLs:               true
+# baseUrl: /  
 defaultContentLanguage: en
 enableEmoji:                true
 googleAnalytics:            UA-62762041-1
@@ -16,10 +16,10 @@ params:
   description: Runing myself like a Startup
   bio: Runing myself like a Startup
   twitter: zzh8829
-  enableRSS: true
+  # enableRSS: true
   disqusShortname: zihaosblog
-  # enableDisqus: true
-  # enableGoogleAnalytics: true
+  enableDisqus: true
+  enableGoogleAnalytics: true
   customCSS:
   - css/zihao.css
   # home: ""
@@ -29,7 +29,7 @@ params:
   # olderPosts: ""
   # newerPosts: ""
   # readMore: ""
-  copyright: Copyright 2017 Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="height:1em;width:auto;border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a> 
+  copyright: Copyright © 2017 Zihao Zhang, Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"></a> 
   # aboutAuthor: 'I am so interesting.'
   # tweet: ""
   # share: ""
