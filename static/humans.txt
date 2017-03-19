@@ -1,0 +1,25 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Zihao Zhang -- Owner -- @zzh8829
+
+# THANKS
+
+    Every contributor to the technology community
+    I am hacking on the shoulders of giants.
+
+# TECHNOLOGY COLOPHON
+
+    Frontend:
+      Hugo, nodejh, Three.js, jQuery, Font Awesome, highlights.js
+    Backend:
+      Kubernetes, Docker, Elixir, Phoenix
+    Server:
+      GitLab Pages, Nginx, Linode, AWS, DigitalOcean, cdnjs
+    Operations:
+      GitLab Registry, GitLab CI, LetsEncrypt, Namecheap
+    Other:
+      Sublime Text, ZShell, GitHub, scm_breeze, 
+ 

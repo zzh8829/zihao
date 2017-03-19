@@ -7,6 +7,16 @@
 <script src="{{ $.Site.BaseURL }}{{ . }}"></script>
 {{ end }}
 
+{{ if .IsHome}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js" integrity="sha256-WKvqiY0jZHWQZIohYEmr9KUC5rEaYEOFTq+ByllJK8w=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js" integrity="sha256-/n5MT3llJIpnhzW4ogf1UKsklcR3HxQO3mMznBFvUaY=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/Detector.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js"></script>
+
+<script src="{{ $.Site.BaseURL }}js/craft.js"></script>
+{{ end }}
+
 {{ if .Site.Params.enableGoogleAnalytics }}
   {{ template "_internal/google_analytics.html" . }}
 {{ end }}

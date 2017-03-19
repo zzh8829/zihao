@@ -1,8 +1,10 @@
 {{ if .IsHome }}
 <nav id="home-nav" class="main-nav">
-  <a href='{{ .Site.BaseURL }}' class="nav-left"> {{ with .Site.Title }}{{ . }}{{ else }}Logo{{ end }}</a>
+  <a href='{{ .Site.BaseURL }}' class="nav-logo"> {{ with .Site.Title }}{{ . }}{{ else }}Logo{{ end }}</a>
+
   <a href='#header'>Blog</a>
   <a href='https://seafile.zihao.me'>Cloud</a>
+  <a href='https://github.com/zzh8829?tab=repositories'>GitHub</a>
   <a href='{{ .Site.BaseURL }}resume.pdf'>Resume</a>
   <a href='{{ .Site.BaseURL }}about'>{{ with .Site.Params.about }}{{ . }}{{ else }}About{{ end }}</a>
 </nav>

@@ -29,12 +29,12 @@ nav.main-nav {
     }
 }
 
-nav.main-nav a.nav-left {
+nav.main-nav a.nav-logo {
   margin-right:auto;
 }
 
 @media screen and (max-width: 768px) {
-    nav.main-nav a.nav-left{
+    nav.main-nav a.nav-logo{
       display: none;
     }
 }
