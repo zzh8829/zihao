@@ -14,3 +14,7 @@ brew install hugo
 hugo server
 ```
 
+## Why GitLab Pages
+> HTTPS is not supported for GitHub Pages using custom domains.
+
+Quote from [GitHub Blog on HTTPS](https://help.github.com/articles/securing-your-github-pages-site-with-https/)

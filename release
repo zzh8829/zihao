@@ -1,17 +1,13 @@
 #!/bin/bash 
 
-git clone git@gitlab.com:zzh8829/zihao-pages.git public
 rm -rf public
 hugo
-cd public
-cat << '_EOF' > .gitlab-ci.yml
-pages:
-  artifacts:
-    paths:
-    - .
-  only:
-  - master
-_EOF
+rm -rf gitlab
+git clone git@gitlab.com:zzh8829/zihao-pages.git gitlab
+rm -rf gitlab/*
+cp -r gitlab-pages/. gitlab/
+mv public gitlab/
+cd gitlab
 git add .
 git commit -m "Update pages $(date)"
-git push
+git push origin master

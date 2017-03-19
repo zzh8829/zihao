@@ -1,0 +1,8 @@
+pages:
+  script:
+  - echo ok
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
