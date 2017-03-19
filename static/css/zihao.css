@@ -26,9 +26,9 @@ nav.main-nav a.cta {
 }
 
 @media screen and (max-width: 768px) {
-    nav.main-nav {
-      padding-right: 15px;
-    }
+  nav.main-nav {
+    padding-right: 15px;
+  }
 }
 
 @media screen and (max-width: 540px) {
@@ -54,6 +54,12 @@ nav.main-nav a.cta {
 
 #footer {
   border-top: 1px solid rgba(0,0,0,.05);
+}
+
+@media screen and (max-width: 540px) {
+  .wrapper.home {
+    padding: 15px!important;
+  }
 }
 
 .scroll-down {

@@ -1,5 +1,4 @@
-![Build Status](https://gitlab.com/zzh8829/zihao/badges/master/build.svg)
-[![coverage report](https://gitlab.com/zzh8829/zihao/badges/master/coverage.svg)](https://gitlab.com/zzh8829/zihao/commits/master)
+![Build Status](https://gitlab.com/zzh8829/zihao-pages/badges/master/build.svg)
 
 ---
 

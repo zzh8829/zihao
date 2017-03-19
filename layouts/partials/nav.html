@@ -2,7 +2,7 @@
 <nav id="home-nav" class="main-nav">
   <a href='{{ .Site.BaseURL }}' class="nav-logo"> {{ with .Site.Title }}{{ . }}{{ else }}Logo{{ end }}</a>
 
-  <a href='#header'>Blog</a>
+  <a href='#blog'>Blog</a>
   <a href='https://seafile.zihao.me'>Cloud</a>
   <a href='https://github.com/zzh8829?tab=repositories'>GitHub</a>
   <a href='{{ .Site.BaseURL }}resume.pdf'>Resume</a>
@@ -14,10 +14,10 @@
   
   {{ if .IsHome }}
   <a href='#demo'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
-  <a href='#header'>Blog</a>
+  <a href='#blog'>Blog</a>
   {{ else }}
   <a href='{{ .Site.BaseURL }}'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
-  <a href='{{ .Site.BaseURL }}#header'>←Blog</a>
+  <a href='{{ .Site.BaseURL }}#blog'>←Blog</a>
   {{ end }}
 
   {{ if ne $url "post/" }}
