@@ -13,6 +13,13 @@ brew install hugo
 hugo server
 ```
 
+## Publish Site
+```
+./release
+```
+This script will generate latest site and update gitlab pages repo
+
+
 ## Why GitLab Pages
 > HTTPS is not supported for GitHub Pages using custom domains.
 

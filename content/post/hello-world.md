@@ -1,16 +1,17 @@
 +++
 date = "2017-03-17T17:43:43-07:00"
-title = "hello world"
+title = "Hello Hugo"
+description = "My first post on this blog"
 tags = ["random"]
-draft = false
+categories = ["other"]
 
 +++
 
-Hugo is great
+Finally decided to start some blogging. Hugo is pretty cool.
 
 ```python
 def hello():
-  print 'hello'
+  print 'Hello World!'
 ```
 
-Thanks
+Welcome all readers.
