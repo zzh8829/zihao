@@ -1,0 +1,12 @@
+<ul id="post-list">
+    {{ range where .Paginator.Pages "Params.hidden" "ne" "true" }}
+        <li style="clear:both;">
+            <a href='{{ .Permalink }}'><aside class="dates">{{ .Date.Format "Jan 2, 06" }}</aside></a>
+            <a href='{{ .Permalink }}'>
+             {{ .Title }} <!-- <h2>{{ .Description | markdownify }}</h2> -->
+
+            <div class="summary"> {{ .Summary }} </div></a>
+            <a href='{{ .Permalink }}'><aside class="read-more" style="float:left;">Read more →</aside></a>
+        </li>
+    {{ end }}
+</ul>

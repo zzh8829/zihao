@@ -1,0 +1,80 @@
+==================================================================
+https://keybase.io/zihao
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://zihao.me
+  * I am zihao (https://keybase.io/zihao) on keybase.
+  * I have a public key with fingerprint A5D4 F88A 78A0 074E 855C  58E7 12B0 1A6A AC10 DF01
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101e6908d1689a5499012473b7b775e0e69bcf437163548e8b521cb440f809068960a",
+            "fingerprint": "a5d4f88a78a0074e855c58e712b01a6aac10df01",
+            "host": "keybase.io",
+            "key_id": "12b01a6aac10df01",
+            "kid": "0101e6908d1689a5499012473b7b775e0e69bcf437163548e8b521cb440f809068960a",
+            "uid": "6fc68a0389e896718bdd47249617c919",
+            "username": "zihao"
+        },
+        "revoke": {
+            "sig_ids": [
+                "62151d4dd99926768ebe07ab0ff1244d8b4fe5c2568988002adf7c22f1f523c70f"
+            ]
+        },
+        "service": {
+            "hostname": "zihao.me",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1489985200,
+    "expire_in": 157680000,
+    "prev": "8115cdd1513cd4a5704d000b2080be65558f937fe2f68496fcc7441437312446",
+    "seqno": 41,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.66
+Comment: https://keybase.io/crypto
+
+yMN5AnicrZJrTFRHFMdZBVsWEApFWzVtuZGqYZfOfc/diKUPEoohgI0tKehyH3Ph
+Cu5ddhdYeTaQEgliLE1rH2FJpGgfWjEKRG0NLGCVNoVdE0FhW2lahFab2ihWBO0s
+aZN+6Md+mplz/uc/v3NmBqOWhxgNsV1rdh2N+cFg+Kb/ZllI7sjOripC0pU9hKWK
+KEZLCypRkNNlLdYUwkIAEpCIEwBUSA4KIssIAiAphqclXuJ5FgGclGSVoXmSo1kG
+IiixFClLDANUCASAizggEiZC1WyFyGF3aDYXthVZhVEhFHkoAsAzCLKszELEk5QE
+SJETRZkEigpIXFikO4MVGE4SnShZ03EMH6xLeP+h/5+5y5bsOFXmMCoNBYQTPAkl
+RWF4ihE4kpcFUggKnchhE3cjrK7UikSdqDERDlSuF6PgUJ1aISZ2EpY8gqNIllQY
+RREEgeJ4DiIJAV6UgKpiQkaBEqMiVqZYzAAhAJSoqLxMUSqpshQt80AldmBvfF25
+Ji+ZB0f076uT8dZE2B26S5f1EhwtcrnsTkuQyLXHHpRVIMn6t4FV0mwKfhxcUY4c
+Tk23ERYSK2WXFnQkGSgIkKUAMBHIbdccyKoFFSwGByAYteMusSUkSVZWFNwbLSuM
+yPKAUXBeogAEEuJYloWqQPMqolQO4sGpsswzDIlfgA62zRHBlkptOmFhSMwpFmJP
+PDWb6CpzIKLG258fGmIwhqwIWxb8tSHG8Jh//rLYGP2wsPSg07bp8+9eTk0Zyngk
+rTbg+8TdNr/hovuFeT4n3UzfeoJpuRMhXH1rfO2d53uMV56sCmQmbJPR9+GTO1re
+HpenqfM/JmTcTIT0rBv4PizOyTRP5PmatFWVI41V0+q9S/zQeGnUlBHZxjSPN+/r
+x5bBtjVxFd1j8U0Z2V1rY0tvH/vz+IMNv17JjDNKdZ3rtJXdJUd8/YZVRXWH2s/O
+NDSyw94cd8r2zufmDgltrqz+Ek/Pm3efLYgaXG9644/55nUHxwI/R6xv8dDM8Lnw
+L8/fCPx2OeLFFPP+ooSuD+LPHFnwRy7E1auLnrLcPueDWL3Snb6tPim6OrWvat9F
+qWDf5sm+qfaXmnfFJE20ywnPJJ14Z2CkZuvyhfCe2Z/a0obuedwNZnbOkB3oLD72
+aMfojSlx5vqCNW/x0uP2ruanB749c86ftTr0cMLlsupA60cRvNn/ap23e6s5v3dL
+REfiZ83bd9oznhI/NoY1pZ9KKjmQ2jsXcv/6wFfR5d69Pvd9/3vXOmDc9PHXSFPb
+acfw7qt7/f7358PehQWr5eEvRtGnnqP0YPym7NZrvzxMTp05VXAYnji5ZSSS1T2J
+rbXDp1+vj20KXRxnjXWpvt8vTFZXbM7Nv3DLnkZFvjLVeztsRcFZb651f+eBWSln
+rHblRnt9Azlx0tKz8W5lbnJHmmk0S/kLbB/UFQ==
+=sLC2
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/zihao
+
+==================================================================

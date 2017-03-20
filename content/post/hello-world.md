@@ -8,6 +8,7 @@ categories = ["other"]
 +++
 
 Finally decided to start some blogging. Hugo is pretty cool.
+<!--more-->
 
 ```python
 def hello():

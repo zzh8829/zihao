@@ -37,7 +37,10 @@ params:
   iconFont: font-awesome
   staticPages: About Tags
 social:
+  linkedin-square: https://linkedin.com/in/zzh8829
+  instagram: https://instagram.com/zihaozhang_
+  github-square: https://github.com/zzh8829
   facebook-square: https://facebook.com/zihao.pro.zhang
   twitter-square: https://twitter.com/zzh8829
-  github-square: https://github.com/zzh8829
+  youtube-square: https://www.youtube.com/user/zzhist
 
