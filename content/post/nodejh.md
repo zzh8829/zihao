@@ -1,7 +1,6 @@
 +++
 date = "2017-03-17T17:43:43-07:00"
 title = "nodejh"
-tags = ["random"]
 hidden = true
 
 +++

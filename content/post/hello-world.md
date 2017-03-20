@@ -2,8 +2,8 @@
 date = "2017-03-17T17:43:43-07:00"
 title = "Hello Hugo"
 description = "My first post on this blog"
-tags = ["random"]
-categories = ["other"]
+tags = ["Random"]
+categories = ["Other"]
 
 +++
 

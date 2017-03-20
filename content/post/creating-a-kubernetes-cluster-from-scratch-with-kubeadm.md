@@ -1,5 +1,5 @@
 +++
-categories = ["cloud"]
+categories = ["Cloud"]
 date = "2017-03-19T10:39:54-07:00"
 description = "How I bootstrapped a mini Kubernetes cluster on ubuntu linux"
 tags = ["Kubernetes", "Docker", "Cloud"]

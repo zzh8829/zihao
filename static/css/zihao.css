@@ -93,6 +93,12 @@ code {
   color: #999;
 }
 
+#post-list li:hover .read-more {
+  text-decoration: none;
+  color: #5badf0;
+  color: #5694f1;
+}
+
 .scroll-down {
   opacity: 1;
   transition: all .5s ease-in 3s;
