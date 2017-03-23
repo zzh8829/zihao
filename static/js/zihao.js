@@ -6,32 +6,39 @@ $(function() {
     });
 });
 
+homeEnabled = true;
 var homenav = $('#home-nav');
 var blognav = $('#blog-nav');
 
-if(homenav.length) {
-    if(window.location.hash) {
-        homenav.hide();
-    } else {
-        blognav.hide();
-    }
-
-    var scrolling = true;
-
-    $(window).scroll(function () {
-      return scrolling = true;
-    });
-
-    setInterval(function () {
-      if (scrolling) {
-        scrolling = false;
-        if ($(window).scrollTop() > 200) {
-          homenav.hide();
-          blognav.show();
-        } else {
-          blognav.hide();
-          homenav.show();
-        }
-      }
-    }, 100);
+if(window.location.hash) {
+    homenav.hide();
+} else {
+    blognav.hide();
 }
+
+function switchMode(mode) {
+  if(mode == 'blog') {
+    blognav.show();
+    homenav.hide();
+  } else if (mode == 'home' && homeEnabled) {
+    blognav.hide();
+    homenav.show();
+  }
+}
+
+var scrolling = true;
+
+$(window).scroll(function () {
+  return scrolling = true;
+});
+
+setInterval(function () {
+  if (scrolling) {
+    scrolling = false;
+    if ($(window).scrollTop() > 200) {
+      switchMode('blog')
+    } else {
+      switchMode('home')
+    }
+  }
+}, 100);

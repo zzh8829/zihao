@@ -6,7 +6,9 @@
   const $        = window.$;
 
   if (!Detector.webgl) {
-    Detector.addGetWebGLMessage();
+    //Detector.addGetWebGLMessage();
+    homeEnabled = false
+    switchMode('blog');
   }
 
   const objects = [];
@@ -115,7 +117,7 @@
 
   const blocks = {};
 
-  const socket = io.connect("https://nodecraft.kube.zihao.ca");
+  const socket = io.connect("https://nodecraft.kube.zihao.me");
   socket.on('init', (data) => {
     serverClearBlocks();
     for (const pos of Object.keys(data)) {
