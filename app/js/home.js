@@ -1,3 +1,5 @@
+import craft from "./craft"
+
 $(function() {
     $('a[href^="#"]').on('click', function(e) {
         e.preventDefault();
@@ -6,7 +8,7 @@ $(function() {
     });
 });
 
-homeEnabled = true;
+let homeEnabled = true;
 var homenav = $('#home-nav');
 var blognav = $('#blog-nav');
 
@@ -15,6 +17,8 @@ if(window.location.hash) {
 } else {
     blognav.hide();
 }
+
+craft();
 
 function switchMode(mode) {
   if(mode == 'blog') {

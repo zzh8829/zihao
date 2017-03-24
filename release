@@ -1,11 +1,10 @@
 #!/bin/bash 
 set -e
-rm -rf public
-hugo
+yarn build
 TMP=$(mktemp -d)
 git clone git@gitlab.com:zzh8829/zihao-pages.git $TMP
 rm -rf $TMP/*
-cp -r gitlab-pages/. $TMP/
+cp -r pages/. $TMP/
 mv public $TMP/
 cd $TMP
 git add .

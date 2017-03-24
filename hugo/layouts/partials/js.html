@@ -1,12 +1,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js" integrity="sha256-3SFEu3qBPVRitcXI7ITnBKtwkYmoqF7ap4xI5dEexaY=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/languages/yaml.min.js"></script>
-<script src="{{ .Site.BaseURL }}js/main.js"></script>
+<script src="/js/main.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-
-{{ range .Site.Params.customJS }}
-<script src="{{ $.Site.BaseURL }}{{ . }}"></script>
-{{ end }}
 
 {{ if .IsHome}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js" integrity="sha256-WKvqiY0jZHWQZIohYEmr9KUC5rEaYEOFTq+ByllJK8w=" crossorigin="anonymous"></script>
@@ -14,8 +10,9 @@
 
 <script src="https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/Detector.js"></script>
 <script src="https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js"></script>
-<script src="{{ $.Site.BaseURL }}js/zihao.js"></script>
-<script src="{{ $.Site.BaseURL }}js/craft.js"></script>
+<script src="/js/home.bundle.js"></script>
+{{ else }}
+<script src="/js/blog.bundle.js"></script>
 {{ end }}
 
 {{ if .Site.Params.enableGoogleAnalytics }}

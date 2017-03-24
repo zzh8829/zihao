@@ -1,4 +1,5 @@
 public/
-gitlab/
-themes/*
-!themes/cactus-plus
+hugo/themes/*
+!hugo/themes/cactus-plus-plus
+node_modules/
+.DS_Store

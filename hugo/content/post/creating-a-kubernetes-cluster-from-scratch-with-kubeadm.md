@@ -1,8 +1,8 @@
 +++
-categories = ["Cloud"]
+categories = ["cloud"]
 date = "2017-03-19T10:39:54-07:00"
-description = "How I bootstrapped a mini Kubernetes cluster on ubuntu linux"
-tags = ["Kubernetes", "Docker", "Cloud"]
+description = "How I bootstrapped a mini Kubernetes cluster on ubuntu linux from scratch with kubeadm and weave"
+tags = ["kubernetes", "docker", "cloud"]
 title = "Creating a Kubernetes Cluster from Scratch with Kubeadm"
 
 +++

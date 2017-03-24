@@ -1,0 +1,23 @@
+{
+  "name": "zihao",
+  "version": "1.0.0",
+  "repository": "git@github.com:zzh8829/zihao.git",
+  "author": "Zihao Zhang <zzh8829@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "gulp build",
+    "server": "gulp server",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.2.2",
+    "browser-sync": "^2.18.8",
+    "css-loader": "^0.27.3",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.2",
+    "webpack": "^2.3.1"
+  }
+}

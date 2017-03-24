@@ -1,4 +1,4 @@
-(() => {
+export default (() => {
   const Detector = window.Detector; // import hacks;
   const THREE    = window.THREE;
   const Stats    = window.Stats;
@@ -6,8 +6,7 @@
   const $        = window.$;
 
   if (!Detector.webgl) {
-    //Detector.addGetWebGLMessage();
-    homeEnabled = false
+    window.homeEnabled = false
     switchMode('blog');
   }
 
@@ -363,4 +362,4 @@
   function generateMap() {
     socket.emit('generate');
   }
-})();
+});

@@ -1,19 +1,16 @@
 baseURL:                    https://zihao.me/
-canonifyURLs:               true
-# baseUrl: /  
-defaultContentLanguage: en
+canonifyURLs:               false
+defaultContentLanguage:     en
 enableEmoji:                true
 googleAnalytics:            UA-62762041-1
 languageCode:               en-us
-# permalinks: maybe
-theme:                      cactus-plus
+theme:                      cactus-plus-plus
 title:                      Zihao Zhang
-# hasCJKLanguage:             true
+hasCJKLanguage:             true
 
 params:
   name: Zihao Zhang
-  description: Running myself like a Startup
-  bio: Running myself like a Startup
+  description: Running Myself Like a Startup
   twitter: zzh8829
   enableRSS: true
   disqusShortname: zihaosblog
@@ -28,7 +25,7 @@ params:
   # olderPosts: ""
   # newerPosts: ""
   # readMore: ""
-  copyright: Copyright © 2017 Zihao Zhang <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"></a> 
+  copyright: Copyright © 2017 Zihao Zhang <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0//">CC BY-NC-SA 4.0</a>
   # aboutAuthor: 'I am so interesting.'
   # tweet: ""
   # share: ""
@@ -41,6 +38,6 @@ social:
   instagram: https://instagram.com/zihaozhang_
   github-square: https://github.com/zzh8829
   facebook-square: https://facebook.com/zihao.pro.zhang
-  twitter-square: https://twitter.com/zzh8829
+  twitter-square: https://twitter-squareter.com/zzh8829
   youtube-square: https://www.youtube.com/user/zzhist
 

@@ -1,0 +1,12 @@
+<ul id="post-list">
+    {{ range where .Paginator.Pages "Params.hidden" "ne" "true" }}
+        <li style="clear:both;">
+            <a href='{{ .RelPermalink }}'><aside class="dates">{{ .Date.Format "Jan 2, 06" }}</aside></a>
+            <a href='{{ .RelPermalink }}'> 
+              {{ .Title }}
+              <div class="summary"> {{ .Summary }} </div>
+            </a>
+            <a href='{{ .RelPermalink }}'><aside class="read-more" style="float:left;">Read more →</aside></a>
+        </li>
+    {{ end }}
+</ul>

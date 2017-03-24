@@ -148,3 +148,7 @@ code {
     transform: translateY(-5px);
   }
 }
+
+#toc {
+  display: none;
+}
