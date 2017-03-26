@@ -152,3 +152,7 @@ code {
 #toc {
   display: none;
 }
+
+ul {
+  margin-bottom: 20px;
+}
