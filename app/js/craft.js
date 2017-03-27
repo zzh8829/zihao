@@ -6,8 +6,8 @@ export default (() => {
   const $        = window.$;
 
   if (!Detector.webgl) {
-    window.homeEnabled = false
-    switchMode('blog');
+    window.noWebGL();
+    return;
   }
 
   const objects = [];

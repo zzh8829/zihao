@@ -10,14 +10,21 @@ $(function() {
     });
 });
 
-window.homeEnabled = true;
-var homenav = $('#home-nav');
-var blognav = $('#blog-nav');
+let homeEnabled = true;
+const homenav = $('#home-nav');
+const blognav = $('#blog-nav');
 
 if(window.location.hash) {
     homenav.hide();
 } else {
     blognav.hide();
+}
+
+window.noWebGL = () => {
+  homeEnabled = false
+  switchMode('blog');
+  $('#demo').hide();
+  $('#demo-nav').hide();
 }
 
 craft();
@@ -32,7 +39,7 @@ function switchMode(mode) {
   }
 }
 
-var scrolling = true;
+let scrolling = true;
 
 $(window).scroll(function () {
   return scrolling = true;

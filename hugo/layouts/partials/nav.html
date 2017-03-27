@@ -13,7 +13,7 @@
   {{ $url := replace .Permalink .Site.BaseURL "" }}
   
   {{ if .IsHome }}
-  <a href='#demo'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
+  <a href='#demo' id='demo-nav'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
   <a href='#blog'>Blog</a>
   {{ else }}
   <a href='/'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
