@@ -10,14 +10,14 @@ hasCJKLanguage:             true
 
 params:
   name: Zihao Zhang
-  description: Running Myself Like a Startup
+  description: Hacking with Bleeding Edge Technology
   twitter: zzh8829
   enableRSS: true
   disqusShortname: zihaosblog
   enableDisqus: true
   enableGoogleAnalytics: true
-  customCSS:
-  - css/zihao.css
+  # customCSS:
+  # - css/zihao.css
   # home: ""
   # about: ""
   # archive: ""

@@ -34,9 +34,9 @@
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
     <link rel="shortcut icon" href="/images/favicon.png">
 
-    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-light.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/style.css">
     
     {{ range .Site.Params.customCSS }}
     <link rel="stylesheet" href="/{{ . }}">
@@ -45,4 +45,21 @@
     {{ if .Site.Params.enableRSS }}
     <link href="{{ .Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
     {{ end }}
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Zihao Zhang",
+      "description": "Computer Science Student at the University of Waterloo. Hacking with Bleeding Edge Technology",
+      "jobTitle": "Student",
+      "url": "https://zihao.me",
+      "sameAs" : [
+        "https://www.facebook.com/zihao.pro.zhang",
+        "https://www.linkedin.com/in/zzh8829",
+        "https://twitter.com/zzh8829",
+        "https://instagram.com/zihaozhang_",
+        "https://plus.google.com/u/0/108091426289970576616"]
+    }
+    </script>
   </head>

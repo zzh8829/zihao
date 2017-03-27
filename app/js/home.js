@@ -1,4 +1,6 @@
 import craft from "./craft"
+import "css/common.css"
+import "css/home.css"
 
 $(function() {
     $('a[href^="#"]').on('click', function(e) {
@@ -8,7 +10,7 @@ $(function() {
     });
 });
 
-let homeEnabled = true;
+window.homeEnabled = true;
 var homenav = $('#home-nav');
 var blognav = $('#blog-nav');
 

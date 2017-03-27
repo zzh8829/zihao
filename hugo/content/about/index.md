@@ -13,3 +13,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 ### Lorem ipsum dolor.
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dicta corporis ad inventore itaque impedit dolor atque amet exercitationem! Veniam qui voluptas maiores vel laudantium necessitatibus, velit ducimus! Iste hic facere, accusamus fugiat enim facilis.
+
+***
+
+*You can opt-out analytics and tracking at [opt-out page](/notrack)*

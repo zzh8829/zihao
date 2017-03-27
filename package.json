@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "gulp build",
-    "server": "gulp server",
+    "server": "cd public && python2.7 -m SimpleHTTPServer",
+    "watch": "gulp watch",
     "lint": "eslint src"
   },
   "devDependencies": {

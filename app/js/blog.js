@@ -1,1 +1,1 @@
-// Nothing yet
+import "css/common.css"

@@ -1,6 +1,5 @@
 import gulp from "gulp";
 import cp from "child_process";
-import gutil from "gulp-util";
 import BrowserSync from "browser-sync";
 import rimraf from "rimraf";
 
@@ -8,46 +7,51 @@ const browserSync = BrowserSync.create();
 const webpackOptions = ["--progress", "--colors", "--display-error-details"]
 const hugoOptions = ["--source", "hugo", "--destination", "../public", "-v"];
 
-gulp.task("clean", (cb) => {
-  rimraf('./public', cb);
-});
+gulp.task("clean", (cb) => rimraf('./public', cb));
 
-function buildHugo(cb, options) {
-  const args = options ? hugoOptions.concat(options) : hugoOptions;
-  return cp.spawn("hugo", args, {stdio: "inherit"}).on("close", (code) => {
-    if (code === 0) {
-      browserSync.reload();
-      cb();
-    } else {
-      browserSync.notify("Hugo build failed :(");
-      cb("Hugo build failed");
-    } 
-  });
-}
+// gulp.task("hugo", (cb) => runHugo(cb, ["--canonifyURLs"]));
+gulp.task("hugo", (cb) => runHugo(cb));
+gulp.task("hugo:watch", (cb) => runHugo(cb, ["--buildDrafts", "--buildFuture"]));
 
-gulp.task("hugo", (cb) => buildHugo(cb, ["--canonifyURLs"]));
-gulp.task("hugo-draft", (cb) => buildHugo(cb, ["--buildDrafts", "--buildFuture"]));
-
-gulp.task("webpack", (cb) => {
-  return cp.spawn("webpack", webpackOptions, {stdio: "inherit"}).on("close", (code) => {
-    if (code === 0) {
-      browserSync.reload();
-      cb();
-    } else {
-      browserSync.notify("Webpack failed :(");
-      cb("Webpack failed");
-    }
-  });
-});
+gulp.task("webpack", (cb) => runWebpack(cb, ["-p"]));
+gulp.task("webpack:watch", (cb) => runWebpack(cb));
 
 gulp.task("build", ["clean", "webpack", "hugo"]);
 
-gulp.task("server", ["clean", "webpack", "hugo-draft"], () => {
+gulp.task("watch", ["clean", "webpack:watch", "hugo:watch"], () => {
   browserSync.init({
     server: {
       baseDir: "./public"
     }
   });
-  gulp.watch("./app/**/*", ["webpack"]);
-  gulp.watch("./hugo/**/*", ["hugo-draft"]);
+  gulp.watch("./app/**/*", ["webpack:watch"]);
+  gulp.watch("./hugo/**/*", ["hugo:watch"]);
 });
+
+function runHugo(cb, options) {
+  return cp.spawn("hugo", 
+                  hugoOptions.concat(options || []), 
+                  {stdio: "inherit"})
+  .on("close", (code) => {
+    if (code === 0) {
+      browserSync.reload();
+    } else {
+      browserSync.notify("Hugo failed! :(");
+    }
+    cb();
+  });
+}
+
+function runWebpack(cb, options) {
+  return cp.spawn("webpack", 
+                  webpackOptions.concat(options || []), 
+                  {stdio: "inherit"})
+  .on("close", (code) => {
+    if (code === 0) {
+      browserSync.reload();
+    } else {
+      browserSync.notify("Webpack failed! :(");
+    }
+    cb();
+  });
+}
