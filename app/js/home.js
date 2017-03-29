@@ -1,6 +1,5 @@
 import craft from "./craft"
-import "css/common.css"
-import "css/home.css"
+// nothing
 
 $(function() {
     $('a[href^="#"]').on('click', function(e) {

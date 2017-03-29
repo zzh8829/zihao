@@ -35,11 +35,11 @@ nav.main-nav a.cta {
 }
 
 .wrapper {
-    max-width: 800px;
+    max-width: 768px;
 }
 
 .wrapper.home {
-    max-width: 800px;
+    max-width: 768px;
 }
 
 .wrapper:first-of-type {
@@ -76,4 +76,10 @@ code {
     font-family: Menlo, Monaco, Courier;
     font-size: 14px;
     font-weight: normal;
+    background-color: #EEEEEE;
+    padding: 0.3em;
+}
+
+.post h2 {
+  margin-bottom: 1em;
 }

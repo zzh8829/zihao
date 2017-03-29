@@ -41,6 +41,10 @@
     {{ range .Site.Params.customCSS }}
     <link rel="stylesheet" href="/{{ . }}">
     {{ end }}
+
+    {{ if .IsHome }} 
+    <link rel="stylesheet" href="/css/home.css">
+    {{ end }}
     
     {{ if .Site.Params.enableRSS }}
     <link href="{{ .Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />

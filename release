@@ -1,6 +1,5 @@
 #!/bin/bash 
 set -e
-yarn build
 TMP=$(mktemp -d)
 git clone git@gitlab.com:zzh8829/zihao-pages.git $TMP
 rm -rf $TMP/*

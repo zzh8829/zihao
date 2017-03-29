@@ -16,8 +16,8 @@ params:
   disqusShortname: zihaosblog
   enableDisqus: true
   enableGoogleAnalytics: true
-  # customCSS:
-  # - css/zihao.css
+  customCSS:
+  - css/common.css
   # home: ""
   # about: ""
   # archive: ""
