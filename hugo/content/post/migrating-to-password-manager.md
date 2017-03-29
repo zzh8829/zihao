@@ -1,10 +1,9 @@
 +++
 categories = ["security"]
 date = "2017-03-23T23:33:17-07:00"
-description = ""
+description = "Migrating to 1Password Manager from Google Chrome"
 tags = ["security", "password"]
 title = "Migrating to Password Manager"
-draft = true
 +++
 
 Having my Spotify password stolen finally tilted me into using a password manager. This is my journey to strong and unique passwords on all my *653* logins.
@@ -54,7 +53,7 @@ This is really the main reason I imported everything to 1Password. With 1Passwor
 
 ![password weak](/images/password-weak.png)
 
-Now we have all these information ready, your job is to fix'em all! There really isn't a painless way, I recommend doing them over period of few weeks and start from the more important websites like emails and banks. In the end, protecting security needs your time and attention, tools are only here to provide some help.
+Now we have all these information ready, your job is to fix'em all! My personal password generation setup is 32 characters long with 4 digits and 2 special characters. There really isn't a painless way to reset everything, I recommend doing them over period of few weeks and start from the more important websites like emails and banks. In the end, protecting security needs your time and attention, tools are only here to provide some help.
 
 *** 
 
