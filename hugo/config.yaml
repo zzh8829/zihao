@@ -32,7 +32,7 @@ params:
   # title404: ""
   # subtitle404: ""
   iconFont: font-awesome
-  staticPages: About Tags
+  staticPages: /about/ /no-track/
 social:
   linkedin-square: https://linkedin.com/in/zzh8829
   instagram: https://instagram.com/zihaozhang_

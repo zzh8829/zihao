@@ -16,4 +16,4 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dicta corporis ad i
 
 ***
 
-*You can opt-out analytics and tracking at [opt-out page](/notrack)*
+*You can opt-out analytics and tracking at [opt-out page](/no-track)*

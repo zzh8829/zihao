@@ -1,13 +1,10 @@
 import gulp from "gulp";
 import cp from "child_process";
 import BrowserSync from "browser-sync";
-import rimraf from "rimraf";
 
 const browserSync = BrowserSync.create();
 const webpackOptions = ["--progress", "--colors", "--display-error-details"]
 const hugoOptions = ["--source", "hugo", "--destination", "../public", "-v"];
-
-gulp.task("clean", (cb) => rimraf('./public', cb));
 
 // gulp.task("hugo", (cb) => runHugo(cb, ["--canonifyURLs"]));
 gulp.task("hugo", (cb) => runHugo(cb));
@@ -16,9 +13,9 @@ gulp.task("hugo:watch", (cb) => runHugo(cb, ["--buildDrafts", "--buildFuture"]))
 gulp.task("webpack", (cb) => runWebpack(cb, ["-p"]));
 gulp.task("webpack:watch", (cb) => runWebpack(cb));
 
-gulp.task("build", ["clean", "webpack", "hugo"]);
+gulp.task("build", ["webpack", "hugo"]);
 
-gulp.task("watch", ["clean", "webpack:watch", "hugo:watch"], () => {
+gulp.task("watch", ["webpack:watch", "hugo:watch"], () => {
   browserSync.init({
     server: {
       baseDir: "./public"

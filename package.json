@@ -5,9 +5,10 @@
   "author": "Zihao Zhang <zzh8829@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "gulp build",
-    "server": "cd public && python2.7 -m SimpleHTTPServer",
-    "watch": "gulp watch",
+    "build": "rm -rf public && gulp build",
+    "server": "yarn build && cd public && python2.7 -m SimpleHTTPServer",
+    "watch": "rm -rf public && gulp watch",
+    "deploy": "yarn build && ./release",
     "lint": "eslint src"
   },
   "devDependencies": {
