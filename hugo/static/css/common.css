@@ -64,10 +64,6 @@ body {
   margin-left: -10px;
 }
 
-#toc {
-  display: none;
-}
-
 ul {
   margin-bottom: 20px;
 }
@@ -76,8 +72,10 @@ code {
     font-family: Menlo, Monaco, Courier;
     font-size: 14px;
     font-weight: normal;
-    background-color: #EEEEEE;
+    background-color: #F1F1F1;
     padding: 0.3em;
+    box-shadow: inset 0 0 0 1px #E4EBF2;
+    border-radius: 3px;
 }
 
 .post h2 {

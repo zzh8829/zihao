@@ -16,6 +16,7 @@ params:
   disqusShortname: zihaosblog
   enableDisqus: true
   enableGoogleAnalytics: true
+  enableToc: false
   customCSS:
   - css/common.css
   # home: ""
