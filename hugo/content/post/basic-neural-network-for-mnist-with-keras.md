@@ -7,10 +7,10 @@ categories = ["artificial intelligence"]
 
 +++
 
-This is a simple tutorial on a basic 97% accruate nueral network model for MNIST. This model contains multiple RELU layer and 2 dropouts layer with a softmax for prediction. 
+This is a simple tutorial on a basic 97% accurate neural network model for MNIST digit classification. This model contains multiple RELU layers and dropouts layers with a softmax layer for prediction. 
 <!--more--> 
 
-Only less than 30s of training time is required on my 15 inch macbook. I strongly recommend jupyter notebook, but normal python terminal is fine too.
+Only less than 30 seconds of training time is required on my 15 inch Macbook. I strongly recommend using jupyter notebook, but normal python terminal is fine too.
 
 ``` bash
 # install some libraries if don't have them
@@ -43,9 +43,8 @@ test_images = pd.read_csv('data/test.csv').values.astype('float32')
 print(train_images.shape, train_labels.shape, test_images.shape)
 ```
 
-output:
 
-
+    output:
     sample_submission.csv
     test.csv
     train.csv
@@ -86,14 +85,12 @@ print(train_labels[0])
 print(train_images.shape, train_labels.shape)
 ```
 
-output:
-
-
+    output:
     [ 0.  1.  0.  0.  0.  0.  0.  0.  0.  0.]
     (42000, 784) (42000, 10)
 
 
-### Train neural network
+### Training neural network
 
 
 ```python
@@ -124,9 +121,7 @@ history=model.fit(train_images, train_labels, validation_split = 0.1,
             epochs=15, batch_size=64)
 ```
 
-output:
-
-
+    output:
     Train on 37800 samples, validate on 4200 samples
     Epoch 1/15
     37800/37800 [==============================] - 2s - loss: 0.4146 - acc: 0.8743 - val_loss: 0.1901 - val_acc: 0.9419
@@ -174,6 +169,7 @@ output:
     37800/37800 [==============================] - 2s - loss: 0.0398 - acc: 0.9887 - val_loss: 0.1522 - val_acc: 0.9726
 
 
+From this output we can see our model is 98.87% accurate on training set and 97.26% accurate on cross validation set.
 
 ```python
 # Graphing Loss on the left and Accuracy on the right
@@ -219,9 +215,11 @@ submissions=pd.DataFrame({"ImageId": list(range(1,len(predictions)+1)),
 submissions.to_csv("predictions.csv", index=False, header=True)
 ```
 
-Everything all together takes about 5 minutes, pretty good for 97% accuracy.
+Everything all together takes about 5 minutes, pretty good for 97% accuracy. There are many ways to improve the accuracy, I might write about them in future. The goal here is just to have a basic working setup and test submissions on Kaggle.
 
 ![kaggle result](/images/mnist-kaggle.png)
+
+With this simple model we achieved 97.257% accuracy on test set.
 
 *** 
 
