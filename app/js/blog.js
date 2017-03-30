@@ -1,4 +1,4 @@
-// nothing
+import './common'
 
 $(() => {
   for(let code of $('code')) {

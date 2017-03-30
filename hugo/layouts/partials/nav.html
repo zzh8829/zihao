@@ -20,18 +20,12 @@
   <a href='/#blog'>←Blog</a>
   {{ end }}
 
-  {{ if ne $url "post/" }}
-    <a href='/post'>{{ with .Site.Params.archive }}{{ . }}{{ else }}Archive{{ end }}</a>
-  {{ end }}
+  <a href='/post'>{{ with .Site.Params.archive }}{{ . }}{{ else }}Archive{{ end }}</a>
 
-  {{ if ne $url "tags/" }}
-    <a href='/tags'>{{ with .Site.Params.about }}{{ . }}{{ else }}Tags{{ end }}</a>
-  {{ end }}
+  <a href='/tags'>{{ with .Site.Params.about }}{{ . }}{{ else }}Tags{{ end }}</a>
 
-  {{ if ne $url "about/" }}
-    <a href='/about'>{{ with .Site.Params.about }}{{ . }}{{ else }}About{{ end }}</a>
-  {{ end }}
-
+  <a href='/about'>{{ with .Site.Params.about }}{{ . }}{{ else }}About{{ end }}</a>
+  
   {{ range $key, $val := .Site.Params.Links }}
     <a href="{{ $val }}">{{ $key }}</a>
   {{ end }}

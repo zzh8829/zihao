@@ -1,3 +1,4 @@
+import './common'
 import craft from "./craft"
 // nothing
 
@@ -32,9 +33,11 @@ function switchMode(mode) {
   if(mode == 'blog') {
     blognav.show();
     homenav.hide();
+    $('nav > a[href="#blog"]').addClass('active');
   } else if (mode == 'home' && homeEnabled) {
     blognav.hide();
     homenav.show();
+    $('nav > a[href="#blog"]').removeClass('active');
   }
 }
 

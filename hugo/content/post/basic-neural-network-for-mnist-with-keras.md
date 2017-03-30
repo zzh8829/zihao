@@ -14,7 +14,7 @@ Only less than 30 seconds of training time is required on my 15 inch Macbook. I 
 
 ``` bash
 # install some libraries if don't have them
-pip3 install numpy pandas sklearn tensorflow keras matplotlib
+pip3 install numpy pandas scipy sklearn tensorflow keras matplotlib
 ```
 
 ### Setting up python environment
