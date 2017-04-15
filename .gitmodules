@@ -1,3 +1,3 @@
 [submodule "cactus-plus"]
-  path = hugo/themes/cactus-plus-plus
+  path = themes/cactus-plus-plus
   url = https://github.com/zzh8829/cactus-plus-plus.git

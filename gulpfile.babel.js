@@ -4,7 +4,7 @@ import BrowserSync from "browser-sync";
 
 const browserSync = BrowserSync.create();
 const webpackOptions = ["--progress", "--colors", "--display-error-details"]
-const hugoOptions = ["--source", "hugo", "--destination", "../public", "-v"];
+const hugoOptions = ["-v"];
 
 // gulp.task("hugo", (cb) => runHugo(cb, ["--canonifyURLs"]));
 gulp.task("hugo", (cb) => runHugo(cb));
@@ -22,7 +22,7 @@ gulp.task("watch", ["webpack:watch", "hugo:watch"], () => {
     }
   });
   gulp.watch("./app/**/*", ["webpack:watch"]);
-  gulp.watch("./hugo/**/*", ["hugo:watch"]);
+  gulp.watch("./**/*", ["hugo:watch"]);
 });
 
 function runHugo(cb, options) {

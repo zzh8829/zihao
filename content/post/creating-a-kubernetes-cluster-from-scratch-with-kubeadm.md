@@ -182,7 +182,7 @@ This deploy script contains 3 parts: Deployment, Service and Ingress. The deploy
 ```
 kubectl apply -f deploy.yaml
 ```
-Point your domain DNS to the master server and after a while you will be able to see our example working at https://hello.kube.zihao.ca YAY!
+Point your domain DNS to the master server and after a while you will be able to see our example working at https://hello.kube.zihao.me YAY!
 
 ![Hello World](/images/kube-hello.png)
 

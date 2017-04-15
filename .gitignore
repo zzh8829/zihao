@@ -1,5 +1,5 @@
 public/
-hugo/themes/*
-!hugo/themes/cactus-plus-plus
+themes/*
+!themes/cactus-plus-plus
 node_modules/
 .DS_Store
