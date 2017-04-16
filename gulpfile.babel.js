@@ -22,7 +22,7 @@ gulp.task("watch", ["webpack:watch", "hugo:watch"], () => {
     }
   });
   gulp.watch("./app/**/*", ["webpack:watch"]);
-  gulp.watch("./**/*", ["hugo:watch"]);
+  gulp.watch(["./content/**/*", "./layouts/**/*", "./static/**/*", "./themes/**/*"], ["hugo:watch"]);
 });
 
 function runHugo(cb, options) {
