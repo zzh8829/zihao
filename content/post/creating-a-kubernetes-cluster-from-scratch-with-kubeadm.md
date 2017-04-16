@@ -53,10 +53,21 @@ sudo echo "/swapfile   none    swap    sw    0   0" >> /etc/fstab
 ```
 Install packages required for Kubernetes
 ```bash
-sudo apt-get update && apt-get install -y apt-transport-https
-sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-sudo echo "deb http://apt.kubernetes.io/ Kubernetes-xenial main" > /etc/apt/sources.list.d/Kubernetes.list
-sudo apt-get update && apt-get install -y docker.io kubelet kubeadm Kubernetes-cni
+# Prepare for new repos
+sudo apt-get -y install apt-transport-https ca-certificates software-properties-common curl
+# Add docker repo
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
+# Add kubernetes repo
+sudo curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+sudo add-apt-repository \
+       "deb https://apt.kubernetes.io/ \
+       kubernetes-$(lsb_release -cs) \
+       main"
+sudo apt-get update && apt-get install -y docker-ce kubelet kubeadm kubernetes-cni
 ```
 Now we can start building the master with kubeadm
 ```bash
@@ -70,7 +81,7 @@ scp root@"master ip":/etc/kubernetes/admin.conf ~/.kube/config
 # We need this to run pods on master node cuz servers are expensive
 kubectl taint nodes --all dedicated-
 # Install weave CNI, there are other choices, but weave is probably the easist
-kubectl apply -f https://git.io/weave-kube
+kubectl apply -f https://git.io/weave-kube-1.6
 # Install Dashboard for nice graphical web interface.
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml
 # Proxy dashboard so we can view it locally

@@ -111,9 +111,6 @@ export default (() => {
   $(document).on('keypress', onDocumentKeyPress);
   $(document).on('keyup', onDocumentKeyUp);
 
-  $('body').append(stats.domElement);
-  $("#demo").append(renderer.domElement);
-
   const blocks = {};
 
   const socket = io.connect("https://nodecraft.kube.zihao.me");
@@ -132,8 +129,14 @@ export default (() => {
   socket.on('clear', () => {
     serverClearBlocks();
   });
+  socket.on('connect_error', () => {
+    window.noWebGL();
+  });
 
   animate();
+
+  $('body').append(stats.domElement);
+  $("#demo").append(renderer.domElement);
 
   function onDocumentMouseMove(event) {
     var x = event.pageX - $('#demo').offset().left;
