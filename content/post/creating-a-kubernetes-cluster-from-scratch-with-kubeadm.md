@@ -178,10 +178,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - hello.kube.zihao.ca
+    - hello.kube.zihao.me
     secretName: hello-tls
   rules:
-  - host: hello.kube.zihao.ca
+  - host: hello.kube.zihao.me
     http:
       paths:
       - backend:
@@ -189,7 +189,7 @@ spec:
           servicePort: 8000
         path: /
 ```
-This deploy script contains 3 parts: Deployment, Service and Ingress. The deployment part will pull our pre-built container image `zihao/hello` and run it with 1 replica. The service part describes that our container *hello* is listening on port 8000, and creates a service *hello* with port 80 for other containers in our cluster to access. The last Ingress part enables HTTPS traffic and says Internet traffic from `hello.kube.zihao.ca` will be directed to our hello service at port 80. Now we will deploy this with
+This deploy script contains 3 parts: Deployment, Service and Ingress. The deployment part will pull our pre-built container image `zihao/hello` and run it with 1 replica. The service part describes that our container *hello* is listening on port 8000, and creates a service *hello* with port 80 for other containers in our cluster to access. The last Ingress part enables HTTPS traffic and says Internet traffic from `hello.kube.zihao.me` will be directed to our hello service at port 80. Now we will deploy this with
 ```
 kubectl apply -f deploy.yaml
 ```
