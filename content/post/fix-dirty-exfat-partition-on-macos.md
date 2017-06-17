@@ -14,9 +14,9 @@ macOS has a very dumb ExFAT driver, it often mark ExFAT formatted hard drive dir
 
 EVERY SINGLE TIME when I plugging my portable hard drive, my mac does absolutely NOTHING. No notification, no warning, no pop-up, no anything. The culprit is this fsck_exfat process.
 
-[fsck_exfat]()
+[fsck_exfat](/images/exfat_fsck.png)
 
-What really happened here was the system marked my hard drive as dirty (potentially corrupted). So when I plugged it in, `fsck_exfat` was checking for errors and attempting to repair them. But in reality, nothing is wrong 99.999% of times and hours of my time is wasted for it to finish scanning terabytes of data.
+What really happened here was the operating system marked my hard drive as dirty (potentially corrupted). So when I plugged it in, `fsck_exfat` was checking for errors and attempting to repair them. But in reality, nothing is wrong 99.999% of times and `fsck` wastes multiple hours to scan terabytes of data.
 
 ## Can I Skip the Check
 
