@@ -8,6 +8,7 @@ categories = ["artificial intelligence"]
 +++
 
 CartPole is the classic game where you try to balance a pole by moving it horizontally. We will try to solve this with a reinforcement learning method called Deep Q Network.
+<!--more-->
 
 ![CartPole](images/cartpole.png)
 
