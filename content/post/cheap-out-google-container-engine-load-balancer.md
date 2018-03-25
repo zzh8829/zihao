@@ -21,7 +21,7 @@ We want our load balancer node to have a static IP address so we don't need to c
 
 ```bash
 # create cluster with one instance
-gcloud container clusters create $CLUSTER_NAME --disable-addons HttpLoadBalancing --disk-size=10 --machine-type=g1-small --num-nodes=1
+gcloud container clusters create $CLUSTER_NAME --disable-addons HttpLoadBalancing --disk-size=30 --machine-type=g1-small --num-nodes=1
 gcloud container clusters get-credentials $CLUSTER_NAME
 
 # re-assign static ip to instance
@@ -169,4 +169,4 @@ Here we have ``nodeSelector: role: load-balancer` so this pod only lands on load
 # install nginx ingres controller with hostPort
 kubectl apply -f nginx-ingress-controller.yaml
 ```
-You can test the default backend with `curl $LB_ADDRESS_IP` and should see output like `default backend - 404`. If everything goes as expected, our cheap ingress controller is ready to use for Ingress resource with `kubernetes.io/ingress.class: "nginx"` annotation. 
+You can test the default backend with `curl $LB_ADDRESS_IP` and should see output like `default backend - 404`. If everything goes as expected, our cheap ingress controller is ready to use for Ingress resource with `kubernetes.io/ingress.class: "nginx"` annotation.
