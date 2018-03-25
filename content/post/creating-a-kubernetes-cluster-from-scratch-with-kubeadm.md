@@ -13,7 +13,7 @@ Containerization and Kubernetes are the hottest cloud technologies right now. He
 ## An Introduction to Kubernetes
 
 You are probably already familiar with docker containers, simply running `docker build` will get you a consistent and reusable deployment unit. Everything sounds great, but manually deploying, restarting on crash, deciding which container goes to which server and managing their IPs and ports are inconvenient and sometimes painful. Kubernetes is an open source container orchestration solution aiming to solve all of those and more.
-  
+
 Here are some important Kubernetes term you should know about
 
 * pod - group of one or more containers running on a *node*
@@ -29,7 +29,7 @@ Here are some important Kubernetes term you should know about
 A standard Kubernetes cluster has following [components](https://kubernetes.io/docs/concepts/overview/components/)
 
 * etcd - Distributed key-value store for configuration and service discovery.
-* weave/flannel - Container Network Interface for connecting services  
+* weave/flannel - Container Network Interface for connecting services
 * kube-apiserver - API server for management and orchestration
 * kube-controller-manager - Controls Kubernetes services
 * kube-discovery - Service discovery
@@ -88,7 +88,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/s
 kubectl proxy
 ```
 Congratulations, now we have a complete working single node Kubernetes *cluster*. You can check the status and explore a bit with dashboard at `localhost:8001/ui`
-![Kubernetes Dashboard](/images/kube-dash.png) 
+![Kubernetes Dashboard](/images/kube-dash.png)
 
 To join more nodes into our cluster, repeat the same commands as the master node above, except the `kubeadm init` is replaced with
 ```bash
@@ -99,10 +99,10 @@ You shouldn't need to manually type this, the master server should print this wi
 ## Ingress, Let's Encrypt and Hello World Deployment
 Now we have our server cluster running, let's put some real work to it. One thing we haven't talked about is how does our app inside the cluster talks to the Internet? If you are running on AWS or GCE, you can use their built-in load balancer for Kubernetes, but since we are building from scratch, we need a thing called Ingress Controller.
 
-Ingress Controller controls load balancing, routing and public HTTPS encryption. Each app needs to define its own Ingress resource which I will cover later. To set up an Ingress Controller you can use my configurations here or read up on fancier versions on official docs 
+Ingress Controller controls load balancing, routing and public HTTPS encryption. Each app needs to define its own Ingress resource which I will cover later. To set up an Ingress Controller you can use my configurations here or read up on fancier versions on official docs
 ```bash
 kubectl apply -f https://gist.githubusercontent.com/zzh8829/fe2e8388a22ec6f2244ccb835b62e07c/raw/4284e123937f5d09683d9a7494d40335e819ccea/nginx-ingress.yaml
-``` 
+```
 This will create a nginx powered ingress that direct all traffic a default back-end that returns 404 for everything. In order to support encrypted HTTPS traffic, we can use [kube-lego](https://github.com/jetstack/kube-lego) to automatically enable HTTPS through Let's Encrypt. Simply download configurations from their [examples](https://github.com/jetstack/kube-lego/tree/master/examples/nginx/lego), modify them and deploy with `kubectl apply -f yourconfigname.yaml`
 
 Now we will create and deploy a basic node.js hello world application. If you don't understand what this code does, just close this page and go back to Reddit or something.
@@ -178,10 +178,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - hello.kube.zihao.me
+    - hello.cloud.zihao.me
     secretName: hello-tls
   rules:
-  - host: hello.kube.zihao.me
+  - host: hello.cloud.zihao.me
     http:
       paths:
       - backend:
@@ -189,17 +189,17 @@ spec:
           servicePort: 8000
         path: /
 ```
-This deploy script contains 3 parts: Deployment, Service and Ingress. The deployment part will pull our pre-built container image `zihao/hello` and run it with 1 replica. The service part describes that our container *hello* is listening on port 8000, and creates a service *hello* with port 80 for other containers in our cluster to access. The last Ingress part enables HTTPS traffic and says Internet traffic from `hello.kube.zihao.me` will be directed to our hello service at port 80. Now we will deploy this with
+This deploy script contains 3 parts: Deployment, Service and Ingress. The deployment part will pull our pre-built container image `zihao/hello` and run it with 1 replica. The service part describes that our container *hello* is listening on port 8000, and creates a service *hello* with port 80 for other containers in our cluster to access. The last Ingress part enables HTTPS traffic and says Internet traffic from `hello.cloud.zihao.me` will be directed to our hello service at port 80. Now we will deploy this with
 ```
 kubectl apply -f deploy.yaml
 ```
-Point your domain DNS to the master server and after a while you will be able to see our example working at https://hello.kube.zihao.me YAY!
+Point your domain DNS to the master server and after a while you will be able to see our example working at https://hello.cloud.zihao.me YAY!
 
 ![Hello World](/images/kube-hello.png)
 
 * * *
 
  *The hello world project is available on [GitLab](https://gitlab.com/zzh8829/hello)*
- 
+
  *Learn more about [Kubernetes](https://kubernetes.io/) and [Docker](https://docker.com)*
 
