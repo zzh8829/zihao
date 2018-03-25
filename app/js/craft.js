@@ -113,7 +113,7 @@ export default (() => {
 
   const blocks = {};
 
-  const socket = io.connect("https://nodecraft.kube.zihao.me");
+  const socket = io.connect("https://nodecraft.cloud.zihao.me");
   socket.on('init', (data) => {
     serverClearBlocks();
     for (const pos of Object.keys(data)) {

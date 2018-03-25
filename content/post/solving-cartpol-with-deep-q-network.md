@@ -1,5 +1,4 @@
 +++
-categories = ["other"]
 date = "2017-08-03T18:00:46-04:00"
 description = "Solving CartPole with Deep Q Network"
 tags = ["machine learning", "openai", "artificial intelligence", "reinforcement learning"]
