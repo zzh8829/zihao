@@ -12,8 +12,13 @@ spec:
     spec:
       containers:
       - name: zihao
-        image: zihao/zihao:latest
+        image: nginx:alpine
         imagePullPolicy: Always
+        command:
+          - /bin/sh
+        args:
+          - -c
+          - "wget https://raw.githubusercontent.com/zzh8829/zihao/master/nginx-zihao.conf -O /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
         ports:
         - containerPort: 8000
         resources:
