@@ -1,0 +1,64 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: zihao
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: zihao
+    spec:
+      containers:
+      - name: zihao
+        image: zihao/zihao:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "30Mi"
+            cpu: "50m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zihao
+  labels:
+    app: zihao
+spec:
+  ports:
+  - port: 80
+    targetPort: 8000
+  selector:
+    app: zihao
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: zihao
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - zihao.me
+    - www.zihao.me
+    secretName: zihao-tls
+  rules:
+  - host: zihao.me
+    http:
+      paths:
+      - backend:
+          serviceName: zihao
+          servicePort: 80
+        path: /
+  - host: www.zihao.me
+    http:
+      paths:
+      - backend:
+          serviceName: zihao
+          servicePort: 80
+        path: /
