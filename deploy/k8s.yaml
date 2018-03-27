@@ -14,11 +14,11 @@ spec:
       - name: zihao
         image: nginx:alpine
         imagePullPolicy: Always
-        command:
-          - /bin/sh
+        command: ["/bin/sh", "-c"]
         args:
-          - -c
-          - "wget https://raw.githubusercontent.com/zzh8829/zihao/master/nginx-zihao.conf -O /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+          - "wget https://raw.githubusercontent.com/zzh8829/zihao/master/deploy/nginx_gcs_proxy.conf -O /etc/nginx/nginx_gcs_proxy.conf && \
+            wget https://raw.githubusercontent.com/zzh8829/zihao/master/deploy/nginx_zihao.conf -O /etc/nginx/conf.d/default.conf && \
+            nginx -g 'daemon off;'"
         ports:
         - containerPort: 8000
         resources:

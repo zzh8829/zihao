@@ -33,32 +33,28 @@ No other additional settings are required, we just need to remember the exact pa
 The key configurations for proxying requests to Google Cloud Storage are listed here
 
 ```
+recursive_error_pages on;
+
 location / {
-    rewrite /$ ${uri}index.html;
-
-    proxy_http_version     1.1;
-    proxy_set_header       Connection "";
-    proxy_set_header       Authorization "";
-    proxy_set_header       Host storage.googleapis.com;
-    proxy_hide_header      X-GUploader-UploadID;
-    proxy_hide_header      x-goog-generation;
-    proxy_hide_header      x-goog-metageneration;
-    proxy_hide_header      x-goog-stored-content-encoding;
-    proxy_hide_header      x-goog-stored-content-length;
-    proxy_hide_header      x-goog-meta-goog-reserved-file-mtime;
-    proxy_hide_header      x-goog-hash;
-    proxy_hide_header      x-goog-storage-class;
-    proxy_hide_header      Accept-Ranges;
-    proxy_hide_header      Alt-Svc;
-    proxy_hide_header      Set-Cookie;
-    proxy_ignore_headers   Set-Cookie;
-    proxy_intercept_errors on;
-
+    include                /etc/nginx/nginx_gcs_proxy.conf;
     proxy_pass             https://storage.googleapis.com/storage.zihao.me/zihao.me$uri;
+    error_page 404 = @index;
+}
+
+location @index {
+    include                /etc/nginx/nginx_gcs_proxy.conf;
+    proxy_pass             https://storage.googleapis.com/storage.zihao.me/zihao.me${uri}index.html;
+    error_page 404 = @slash_index;
+}
+
+location @slash_index {
+    include                /etc/nginx/nginx_gcs_proxy.conf;
+    proxy_pass             https://storage.googleapis.com/storage.zihao.me/zihao.me${uri}/index.html;
+    error_page 404 = /404.html;
 }
 ```
 
-The `rewrite` setting is required so "https://zihao.me" is automatically loaded from "https://zihao.me/index.html", the more common `index index.html` setting will not work here for proxy_pass since it was designed for local files. We are removing all the headers sent from Google Cloud Storage with the `proxy_hide_header` settings. The final step is proxy the request to Google with `proxy_pass` to `https://storage.googleapis.com/BUCKET/PATH$uri` as shown in the config. The exact configuration used for my file is available on my [GitHub Repository](https://github.com/zzh8829/zihao/blob/master/nginx-zihao.conf)
+Since Google Cloud Storage is just a simple file storage engine, we need to do some extra work to make URL access working. We setup a two level redirections so `folder/index.html`, `folder` and `folder/` all leads to the file at `folder/index.html`. The more common `index index.html` and `try_files $uri` settings do not work here since they were designed for local files only. The included [`nginx_gcs_proxy.conf`]](https://github.com/zzh8829/zihao/blob/master/deploy/nginx_gcs_proxy.conf) sets correct proxy request headers and removes unnecessary response headers from Google Cloud Storage. The URL used in `proxy_pass` is `https://storage.googleapis.com/BUCKET/PATH$uri` as shown in the config. The exact configuration used for my file is available on my [GitHub Repository](https://github.com/zzh8829/zihao/blob/master/deploy/nginx_zihao.conf)
 
 ## Kubernetes
 
@@ -72,11 +68,11 @@ We can simply used the official lightweight Nginx docker image at `nginx:alpine`
 containers:
 - name: zihao
   image: nginx:alpine
-  command:
-    - /bin/sh
+  command: ["/bin/sh", "-c"]
   args:
-    - -c
-    - "wget https://raw.githubusercontent.com/zzh8829/zihao/master/nginx-zihao.conf -O /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    - "wget https://raw.githubusercontent.com/zzh8829/zihao/master/deploy/nginx_gcs_proxy.conf -O /etc/nginx/nginx_gcs_proxy.conf && \
+      wget https://raw.githubusercontent.com/zzh8829/zihao/master/deploy/nginx_zihao.conf -O /etc/nginx/conf.d/default.conf && \
+      nginx -g 'daemon off;'"
   ports:
   - containerPort: 8000
 ```
@@ -100,4 +96,4 @@ rules:
       path: /
 ```
 
-The complete Kubernetes setting is also available on my [GitHub Repository](https://github.com/zzh8829/zihao/blob/master/k8s.yaml). After all the hard work, simply deploy the image with `kubectl apply -f k8s.yaml` and congratulations: the website is online at https://zihao.me
+The complete Kubernetes setting is also available on my [GitHub Repository](https://github.com/zzh8829/zihao/blob/master/deploy/k8s.yaml). After all the hard work, simply deploy the image with `kubectl apply -f k8s.yaml` and congratulations: the website is online at https://zihao.me

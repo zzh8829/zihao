@@ -8,8 +8,8 @@
     "build": "rm -rf public && gulp build",
     "server": "yarn build && cd public && python2.7 -m SimpleHTTPServer",
     "watch": "rm -rf public && gulp watch",
-    "deploy": "yarn build && ./release-k8s.sh",
-    "deploy-gitlab": "yarn build && ./release-gitlab.sh",
+    "deploy": "yarn build && ./deploy/release-k8s.sh",
+    "deploy-gitlab": "yarn build && ./deploy/release-gitlab.sh",
     "lint": "eslint src"
   },
   "devDependencies": {
