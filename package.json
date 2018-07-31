@@ -5,9 +5,10 @@
   "author": "Zihao Zhang <zzh8829@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf public && gulp build",
+    "clean": "rm -rf public",
+    "build": "gulp build",
     "server": "yarn build && cd public && python2.7 -m SimpleHTTPServer",
-    "watch": "rm -rf public && gulp watch",
+    "watch": "gulp watch",
     "deploy": "yarn build && ./deploy/release-k8s.sh",
     "deploy-gitlab": "yarn build && ./deploy/release-gitlab.sh",
     "lint": "eslint src"
