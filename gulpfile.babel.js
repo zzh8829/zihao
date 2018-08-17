@@ -3,52 +3,50 @@ import cp from "child_process";
 import BrowserSync from "browser-sync";
 
 const browserSync = BrowserSync.create();
-const webpackOptions = ["--progress", "--colors", "--display-error-details"]
+const webpackOptions = ["--colors", "--display-error-details"];
 const hugoOptions = ["-v"];
 
-// gulp.task("hugo", (cb) => runHugo(cb, ["--canonifyURLs"]));
-gulp.task("hugo", (cb) => runHugo(cb));
-gulp.task("hugo:watch", (cb) => runHugo(cb, ["--buildDrafts", "--buildFuture"]));
+gulp.task("hugo", done => runHugo(done));
+gulp.task("webpack", done =>
+  runWebpack(["--mode production", "--profile"], done)
+);
 
-gulp.task("webpack", (cb) => runWebpack(cb, ["-p"]));
-gulp.task("webpack:watch", (cb) => runWebpack(cb));
+gulp.task("build", gulp.parallel("webpack", "hugo"));
 
-gulp.task("build", ["webpack", "hugo"]);
+gulp.task("watch", () => {
+  runWebpack(["--mode", "development", "--watch"]);
+  runHugo(["--buildDrafts", "--buildFuture", "--watch"]);
 
-gulp.task("watch", ["webpack:watch", "hugo:watch"], () => {
   browserSync.init({
     server: {
       baseDir: "./public"
     }
   });
-  gulp.watch("./app/**/*", ["webpack:watch"]);
-  gulp.watch(["./content/**/*", "./layouts/**/*", "./static/**/*", "./themes/**/*"], ["hugo:watch"]);
+  gulp.watch("./public/**/*").on("change", browserSync.reload);
 });
 
-function runHugo(cb, options) {
-  return cp.spawn("hugo", 
-                  hugoOptions.concat(options || []), 
-                  {stdio: "inherit"})
-  .on("close", (code) => {
-    if (code === 0) {
-      browserSync.reload();
-    } else {
-      browserSync.notify("Hugo failed! :(");
-    }
-    cb();
-  });
+function runHugo(options, done = null) {
+  return cp
+    .spawn("hugo", hugoOptions.concat(options || []), { stdio: "inherit" })
+    .on("close", code => {
+      if (code === 0) {
+        done && done()
+      } else {
+        done && done("Hugo failed! :(");
+      }
+    });
 }
 
-function runWebpack(cb, options) {
-  return cp.spawn("webpack", 
-                  webpackOptions.concat(options || []), 
-                  {stdio: "inherit"})
-  .on("close", (code) => {
-    if (code === 0) {
-      browserSync.reload();
-    } else {
-      browserSync.notify("Webpack failed! :(");
-    }
-    cb();
-  });
+function runWebpack(options, done = null) {
+  return cp
+    .spawn("webpack", webpackOptions.concat(options || []), {
+      stdio: "inherit"
+    })
+    .on("close", code => {
+      if (code === 0) {
+        done && done()
+      } else {
+        done && done("Webpack failed! :(");
+      }
+    });
 }
