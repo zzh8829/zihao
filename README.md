@@ -1,8 +1,13 @@
+# zihao.me
+
 ![Build Status](https://gitlab.com/zzh8829/zihao-pages/badges/master/build.svg)
 
----
+Zihao Zhang's person website powered by:
 
-Zihao Zhang's person website powered by Hugo and GitLab Pages.
+- Hugo: Static HTML generator
+- Webpack: JavaScript packer
+- Gulp: Build pipeline
+-
 
 ---
 
@@ -10,17 +15,23 @@ Zihao Zhang's person website powered by Hugo and GitLab Pages.
 
 ```
 brew install hugo
-hugo server
+brew install node
+
+yarn install
+yarn watch
 ```
 
 ## Publish Site
 ```
-./release
+yarn deploy
+yarn deploy-gitlab
 ```
-This script will generate latest site and update gitlab pages repo
 
-
-## Why GitLab Pages
-> HTTPS is not supported for GitHub Pages using custom domains.
-
-Quote from [GitHub Blog on HTTPS](https://help.github.com/articles/securing-your-github-pages-site-with-https/)
+## All Commands
+```
+watch           # Build + watch + dev server
+build           # Build production
+clean           # Clean artifacts
+deploy          # Deploy with Google Cloud Storage
+deploy-gitlab   # Deploy with GitLab
+```
