@@ -6,22 +6,22 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf public",
-    "watch": "gulp watch",
+    "start": "gulp watch",
     "build": "gulp build",
     "deploy": "yarn clean && yarn build && ./deploy/release-k8s.sh",
     "deploy-gitlab": "yarn clean && yarn build && ./deploy/release-gitlab.sh"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-rc.1",
-    "@babel/core": "^7.0.0-rc.1",
-    "@babel/preset-env": "^7.0.0-rc.1",
-    "@babel/register": "^7.0.0-rc.1",
-    "babel-loader": "^8.0.0-beta.4",
-    "browser-sync": "^2.18.8",
-    "css-loader": "^1.0.0",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "browser-sync": "^2.26.3",
+    "css-loader": "^1.0.1",
     "gulp": "^4.0.0",
     "gulp-cli": "^2.0.1",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0"
+    "webpack": "^4.24.0",
+    "webpack-cli": "^3.1.2"
   }
 }

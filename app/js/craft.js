@@ -1,11 +1,11 @@
 export default (() => {
-  const Detector = window.Detector; // import hacks;
+  const WEBGL    = window.WEBGL; // import hacks;
   const THREE    = window.THREE;
   const Stats    = window.Stats;
   const io       = window.io;
   const $        = window.$;
 
-  if (!Detector.webgl) {
+  if (!WEBGL.isWebGLAvailable()) {
     window.noWebGL();
     return;
   }
@@ -45,7 +45,7 @@ export default (() => {
   // cubes
 
   const cubeGeo = new THREE.BoxGeometry(50, 50, 50);
-  const cubeMaterial = new THREE.MeshLambertMaterial({ color: 0xfeb74c, shading: THREE.FlatShading });
+  const cubeMaterial = new THREE.MeshLambertMaterial({ color: 0xfeb74c, flatShading: true });
 
   // grid
 
