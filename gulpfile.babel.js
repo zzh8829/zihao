@@ -30,7 +30,7 @@ function runHugo(options) {
 }
 
 function runWebpack(options) {
-  return cp.spawn("webpack", webpackOptions.concat(options || []), {
+  return cp.spawn("yarn", ["webpack"].concat(webpackOptions.concat(options || [])), {
     stdio: "inherit"
   });
 }

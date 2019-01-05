@@ -54,7 +54,7 @@ location @slash_index {
 }
 ```
 
-Since Google Cloud Storage is just a simple file storage engine, we need to do some extra work to make URL access working. We setup a two level redirections so `folder/index.html`, `folder` and `folder/` all leads to the file at `folder/index.html`. The more common `index index.html` and `try_files $uri` settings do not work here since they were designed for local files only. The included [`nginx_gcs_proxy.conf`]](https://github.com/zzh8829/zihao/blob/master/deploy/nginx_gcs_proxy.conf) sets correct proxy request headers and removes unnecessary response headers from Google Cloud Storage. The URL used in `proxy_pass` is `https://storage.googleapis.com/BUCKET/PATH$uri` as shown in the config. The exact configuration used for my file is available on my [GitHub Repository](https://github.com/zzh8829/zihao/blob/master/deploy/nginx_zihao.conf)
+Since Google Cloud Storage is just a simple file storage engine, we need to do some extra work to make URL access working. We setup a two level redirections so `folder/index.html`, `folder` and `folder/` all leads to the file at `folder/index.html`. The more common `index index.html` and `try_files $uri` settings do not work here since they were designed for local files only. The included [`nginx_gcs_proxy.conf`](https://github.com/zzh8829/zihao/blob/master/deploy/nginx_gcs_proxy.conf) sets correct proxy request headers and removes unnecessary response headers from Google Cloud Storage. The URL used in `proxy_pass` is `https://storage.googleapis.com/BUCKET/PATH$uri` as shown in the config. The exact configuration used for my file is available on my [GitHub Repository](https://github.com/zzh8829/zihao/blob/master/deploy/nginx_zihao.conf)
 
 ## Kubernetes
 

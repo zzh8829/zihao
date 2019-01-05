@@ -1,11 +1,9 @@
-import webpack from "webpack";
 import path from "path";
 
 export default {
-  context: path.resolve(__dirname, "app"),
   entry: {
-    home: ["./js/home"],
-    blog: ["./js/blog"]
+    home: ["./app/js/home"],
+    blog: ["./app/js/blog"]
   },
   output: {
     path: path.resolve(__dirname, "public", "js"),
@@ -28,10 +26,5 @@ export default {
         use: ['style-loader', 'css-loader']
       }
     ]
-  },
-  resolve: {
-    modules: [
-      path.resolve('./app')
-    ]
-  },
+  }
 };
