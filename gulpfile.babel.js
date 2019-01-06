@@ -6,10 +6,10 @@ const browserSync = BrowserSync.create();
 const webpackOptions = ["--colors", "--display-error-details"];
 const hugoOptions = ["-v"];
 
-gulp.task("webpack", () => runWebpack(["--mode", "production", "--profile"]));
-gulp.task("hugo", () => runHugo());
-
-gulp.task("build", gulp.parallel("webpack", "hugo"));
+gulp.task("build", gulp.parallel(
+  () => runWebpack(["--mode", "production", "--profile"]),
+  () => runHugo()
+));
 
 gulp.task("watch", () => {
   runWebpack(["--mode", "development", "--watch"]);
@@ -30,7 +30,7 @@ function runHugo(options) {
 }
 
 function runWebpack(options) {
-  return cp.spawn("yarn", ["webpack"].concat(webpackOptions.concat(options || [])), {
+  return cp.spawn("yarn", ["webpack"].concat(webpackOptions, options || []), {
     stdio: "inherit"
   });
 }
