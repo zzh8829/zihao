@@ -1,6 +1,7 @@
 import path from "path";
 
 export default {
+  devtool: 'source-map',
   entry: {
     home: ["./app/js/home"],
     blog: ["./app/js/blog"]

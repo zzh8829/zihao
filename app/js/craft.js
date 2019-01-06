@@ -1,180 +1,396 @@
-export default (() => {
-  const WEBGL    = window.WEBGL; // import hacks;
-  const THREE    = window.THREE;
-  const Stats    = window.Stats;
-  const io       = window.io;
-  const $        = window.$;
+const WEBGL = window.WEBGL; // import hacks;
+const THREE = window.THREE;
+const Stats = window.Stats;
+const io = window.io;
+const $ = window.$;
 
-  if (!WEBGL.isWebGLAvailable()) {
-    window.noWebGL();
-    return;
+const NODECRAFT_BACKEND = "https://nodecraft.cloud.zihao.me";
+const BLOCK_SIZE = 50;
+const PLANE_SIZE = 10000;
+const BLOCK_COLOR = 0xfeb74c;
+const ROLL_OVER_COLOR = 0x1b5c5a;
+
+class Blocks {
+  constructor(scene, plane) {
+    this.scene = scene;
+    this.objects = [plane]; // for collison
+    this.blocks = {};
+
+    // cubes
+    this.cubeGeo = new THREE.BoxGeometry(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+    this.cubeMaterial = new THREE.MeshLambertMaterial({
+      color: BLOCK_COLOR,
+      flatShading: true
+    });
   }
 
-  const objects = [];
-  const keysdown = {};
-
-  const clock = new THREE.Clock();
-
-  let autoRotate = true;
-
-  let angle = 0;
-  let zoom = 1;
-
-  THREE.ImageUtils.crossOrigin = '';
-
-  let width = window.innerWidth;
-  let height = window.innerHeight;
-
-  const scene = new THREE.Scene();
-
-  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-  // camera.position.set( 200, 320, 640 );
-  camera.lookAt(new THREE.Vector3());
-
-  // fog
-  scene.fog = new THREE.FogExp2(0xffffff, 0.0005);
-
-  // rollover
-
-  const rollOverGeo = new THREE.BoxGeometry(50, 50, 50);
-  const rollOverMaterial = new THREE.MeshBasicMaterial({ color: 0x1B5C5A, opacity: 0.5, transparent: true });
-  const rollOverMesh = new THREE.Mesh(rollOverGeo, rollOverMaterial);
-  rollOverMesh.visible = false;
-  scene.add(rollOverMesh);
-
-  // cubes
-
-  const cubeGeo = new THREE.BoxGeometry(50, 50, 50);
-  const cubeMaterial = new THREE.MeshLambertMaterial({ color: 0xfeb74c, flatShading: true });
-
-  // grid
-
-  const size = 10000;
-  const step = 50;
-
-  let geometry = new THREE.Geometry();
-
-  for (let i = - size; i <= size; i += step) {
-    geometry.vertices.push(new THREE.Vector3(- size, 0, i));
-    geometry.vertices.push(new THREE.Vector3(size, 0, i));
-
-    geometry.vertices.push(new THREE.Vector3(i, 0, - size));
-    geometry.vertices.push(new THREE.Vector3(i, 0, size));
-  }
-
-  const material = new THREE.LineBasicMaterial({ color: 0x000000, opacity: 0.2, transparent: true });
-
-  const line = new THREE.LineSegments(geometry, material);
-  scene.add(line);
-
-  //
-
-  const raycaster = new THREE.Raycaster();
-  const mouse = new THREE.Vector2(-1, -1);
-
-  geometry = new THREE.PlaneBufferGeometry(10000, 10000);
-  geometry.rotateX(- Math.PI / 2);
-
-  const plane = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ visible: false }));
-  scene.add(plane);
-
-  objects.push(plane);
-
-  // Lights
-
-  const ambientLight = new THREE.AmbientLight(0x606060);
-  scene.add(ambientLight);
-
-  const directionalLight = new THREE.DirectionalLight(0xffffff);
-  directionalLight.position.set(1, 0.75, 0.5).normalize();
-  scene.add(directionalLight);
-
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setSize(width, height);
-  renderer.domElement.style.position = 'absolute';
-  renderer.domElement.style.top = '0px';
-
-  const stats = new Stats();
-  stats.domElement.style.position = 'absolute';
-  stats.domElement.style.right = '0px';
-  stats.domElement.style.bottom = '0px';
-  stats.domElement.style.zIndex = 100;
-  stats.domElement.style.visibility = 'hidden';
-
-  window.addEventListener('resize', onWindowResize, false);
-
-  $('#demo').on('mousemove', onDocumentMouseMove);
-  $('#demo').on('mousedown', onDocumentMouseDown);
-  // renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
-  // renderer.domElement.addEventListener( 'touchend', onDocumentTouchEnd, false);
-  $(document).on('keydown', onDocumentKeyDown);
-  $(document).on('keypress', onDocumentKeyPress);
-  $(document).on('keyup', onDocumentKeyUp);
-
-  const blocks = {};
-
-  const socket = io.connect("https://nodecraft.cloud.zihao.me");
-  socket.on('init', (data) => {
-    serverClearBlocks();
-    for (const pos of Object.keys(data)) {
-      serverInsertBlock.apply(null, pos.split(',').map(Number));
+  delete(x, y, z) {
+    if ([x, y, z] in this.blocks) {
+      this.scene.remove(this.blocks[[x, y, z]]);
+      this.objects.splice(this.objects.indexOf(this.blocks[[x, y, z]]), 1);
+      delete this.blocks[[x, y, z]];
     }
-  });
-  socket.on('insert', (data) => {
-    serverInsertBlock.apply(null, data);
-  });
-  socket.on('delete', (data) => {
-    serverDeleteBlock.apply(null, data);
-  });
-  socket.on('clear', () => {
-    serverClearBlocks();
-  });
-  socket.on('connect_error', () => {
-    window.noWebGL();
-  });
-
-  animate();
-
-  $('body').append(stats.domElement);
-  $("#demo").append(renderer.domElement);
-
-  function onDocumentMouseMove(event) {
-    var x = event.pageX - $('#demo').offset().left;
-    var y = event.pageY - $('#demo').offset().top;
-
-    mouse.set((x / width) * 2 - 1, - (y / height) * 2 + 1);
   }
 
-  function onDocumentMouseDown(event) {
-    var x = event.pageX - $('#demo').offset().left;
-    var y = event.pageY - $('#demo').offset().top;
+  insert(x, y, z) {
+    if (!([x, y, z] in this.blocks)) {
+      const voxel = new THREE.Mesh(this.cubeGeo, this.cubeMaterial);
+      voxel.position
+        .set(x, y, z)
+        .multiplyScalar(BLOCK_SIZE)
+        .addScalar(BLOCK_SIZE / 2);
+      this.scene.add(voxel);
+      this.objects.push(voxel);
+      this.blocks[[x, y, z]] = voxel;
+    }
+  }
 
-    mouse.set((x / width) * 2 - 1, - (y / height) * 2 + 1);
-    raycaster.setFromCamera(mouse, camera);
+  clear() {
+    for (const pos of Object.keys(this.blocks)) {
+      this.delete(...pos.split(",").map(Number));
+    }
+  }
+}
 
-    const intersects = raycaster.intersectObjects(objects);
+class Craft {
+  constructor(rootElement) {
+    this.rootElement = rootElement;
+    this.clock = new THREE.Clock();
+    this.error = () => { };
+
+    this.width = null;
+    this.height = null;
+    this.scene = null;
+    this.raycaster = null;
+    this.camera = null;
+    this.mouse = null;
+
+    this.blocks = null;
+    this.plane = null;
+    this.rollOverMesh = null;
+
+    this.keysdown = {};
+    this.autoRotate = true;
+    this.angle = 0;
+    this.zoom = 1;
+
+    this.renderer = null;
+    this.stats = null;
+  }
+
+  onDocumentMouseMove(event) {
+    var x = event.pageX - this.rootElement.offset().left;
+    var y = event.pageY - this.rootElement.offset().top;
+
+    this.mouse.set((x / this.width) * 2 - 1, -(y / this.height) * 2 + 1);
+  }
+
+  onDocumentMouseDown(event) {
+    var x = event.pageX - this.rootElement.offset().left;
+    var y = event.pageY - this.rootElement.offset().top;
+
+    this.mouse.set((x / this.width) * 2 - 1, -(y / this.height) * 2 + 1);
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+
+    const intersects = this.raycaster.intersectObjects(this.blocks.objects);
 
     if (intersects.length > 0) {
       const intersect = intersects[0];
-        // delete cube
+
       if (event.ctrlKey || event.metaKey) {
-        if (intersect.object !== plane) {
-          const position = new THREE.Vector3().copy(intersect.object.position).divideScalar(50).floor();
-          deleteBlock(position.x, position.y, position.z);
+        // delete cube
+        if (intersect.object !== this.plane) {
+          const position = new THREE.Vector3()
+            .copy(intersect.object.position)
+            .divideScalar(BLOCK_SIZE)
+            .floor();
+          this.deleteBlock(position.x, position.y, position.z);
         }
+      } else {
         // create cube
-      }
-      else {
-        const position = new THREE.Vector3().copy(intersect.point).add(intersect.face.normal).divideScalar(50).floor();
-        insertBlock(position.x, position.y, position.z);
+        const position = new THREE.Vector3()
+          .copy(intersect.point)
+          .add(intersect.face.normal)
+          .divideScalar(BLOCK_SIZE)
+          .floor();
+        this.insertBlock(position.x, position.y, position.z);
       }
     }
   }
 
-  // let clickTimer = null;
-  // let lastTap = 0;
+  onDocumentKeyDown(event) {
+    const code = event.which || event.keyCode;
+    const char = String.fromCharCode(code);
 
-  // function onDocumentTouchStart(event) {
+    this.keysdown[code] = true;
+
+    switch (char) {
+      case "A":
+        this.autoRotate = false;
+        break;
+      case "D":
+        this.autoRotate = false;
+        break;
+      default:
+    }
+  }
+
+  onDocumentKeyPress(event) {
+    const code = event.which || event.keyCode;
+    this.keysdown[code] = true;
+
+    const char = String.fromCharCode(code).toUpperCase();
+    switch (char) {
+      case "Q":
+        if (this.stats.domElement.style.visibility === "hidden") {
+          this.stats.domElement.style.visibility = "visible";
+        } else {
+          this.stats.domElement.style.visibility = "hidden";
+        }
+        break;
+      case "C":
+        this.clearBlocks();
+        break;
+      case "G":
+        this.generateMap();
+        break;
+      case " ":
+        this.autoRotate = !this.autoRotate;
+        event.preventDefault();
+        break;
+      default:
+    }
+  }
+
+  onDocumentKeyUp(event) {
+    const code = event.which || event.keyCode;
+    this.keysdown[code] = false;
+  }
+
+  animate() {
+    requestAnimationFrame(this.animate.bind(this));
+
+    const delta = this.clock.getDelta();
+
+    if (this.mouse.x !== -1 && this.mouse.y !== -1) {
+      this.rollOverMesh.visible = true;
+
+      this.raycaster.setFromCamera(this.mouse, this.camera);
+
+      const intersects = this.raycaster.intersectObjects(this.blocks.objects);
+
+      if (intersects.length > 0) {
+        const intersect = intersects[0];
+
+        this.rollOverMesh.position
+          .copy(intersect.point)
+          .add(intersect.face.normal);
+        this.rollOverMesh.position
+          .divideScalar(BLOCK_SIZE)
+          .floor()
+          .multiplyScalar(BLOCK_SIZE)
+          .addScalar(BLOCK_SIZE / 2);
+      }
+    }
+
+    if (this.autoRotate) {
+      this.angle += delta * 0.1;
+    }
+
+    // a
+    if (this.keysdown[65]) {
+      this.angle += delta;
+    }
+
+    // d
+    if (this.keysdown[68]) {
+      this.angle -= delta;
+    }
+
+    // s
+    if (this.keysdown[83]) {
+      this.zoom = Math.min(2, this.zoom * 1.01);
+    }
+
+    // w
+    if (this.keysdown[87]) {
+      this.zoom = Math.max(1, this.zoom / 1.01);
+    }
+
+    this.camera.position.x = Math.cos(this.angle) * 700 * this.zoom;
+    this.camera.position.y = 800 * this.zoom;
+    this.camera.position.z = Math.sin(this.angle) * 700 * this.zoom;
+    this.camera.lookAt(new THREE.Vector3());
+
+    this.renderer.render(this.scene, this.camera);
+
+    this.stats.update();
+  }
+
+  onWindowResize() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    this.camera.aspect = this.width / this.height;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(this.width, this.height);
+  }
+
+  insertBlock(x, y, z) {
+    this.blocks.insert(x, y, z);
+    this.socket.emit("insert", [x, y, z]);
+  }
+
+  deleteBlock(x, y, z) {
+    this.blocks.delete(x, y, z);
+    this.socket.emit("delete", [x, y, z]);
+  }
+
+  clearBlocks() {
+    this.blocks.clear();
+    this.socket.emit("clear");
+  }
+
+  generateMap() {
+    this.socket.emit("generate");
+  }
+
+  run() {
+    if (!WEBGL.isWebGLAvailable()) {
+      this.error();
+      return;
+    }
+
+    THREE.ImageUtils.crossOrigin = "";
+
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(
+      45,
+      this.width / this.height,
+      1,
+      10000
+    );
+    // camera.position.set( 200, 320, 640 );
+    this.camera.lookAt(new THREE.Vector3());
+
+    // fog
+    this.scene.fog = new THREE.FogExp2(0xffffff, 0.0005);
+
+    // rollover
+    const rollOverGeo = new THREE.BoxGeometry(
+      BLOCK_SIZE,
+      BLOCK_SIZE,
+      BLOCK_SIZE
+    );
+    const rollOverMaterial = new THREE.MeshBasicMaterial({
+      color: ROLL_OVER_COLOR,
+      opacity: 0.5,
+      transparent: true
+    });
+    this.rollOverMesh = new THREE.Mesh(rollOverGeo, rollOverMaterial);
+    this.rollOverMesh.visible = false;
+    this.scene.add(this.rollOverMesh);
+
+    // grid
+    const size = PLANE_SIZE;
+    const step = BLOCK_SIZE;
+
+    const lineGeo = new THREE.Geometry();
+    for (let i = -size; i <= size; i += step) {
+      lineGeo.vertices.push(new THREE.Vector3(-size, 0, i));
+      lineGeo.vertices.push(new THREE.Vector3(size, 0, i));
+
+      lineGeo.vertices.push(new THREE.Vector3(i, 0, -size));
+      lineGeo.vertices.push(new THREE.Vector3(i, 0, size));
+    }
+    const line = new THREE.LineSegments(
+      lineGeo,
+      new THREE.LineBasicMaterial({
+        color: 0x000000,
+        opacity: 0.2,
+        transparent: true
+      })
+    );
+    this.scene.add(line);
+
+    const planeGeo = new THREE.PlaneBufferGeometry(PLANE_SIZE, PLANE_SIZE);
+    planeGeo.rotateX(-Math.PI / 2);
+    this.plane = new THREE.Mesh(
+      planeGeo,
+      new THREE.MeshBasicMaterial({ visible: false })
+    );
+    this.scene.add(this.plane);
+
+    this.raycaster = new THREE.Raycaster();
+    this.mouse = new THREE.Vector2(-1, -1);
+
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0x606060);
+    this.scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight.position.set(1, 0.75, 0.5).normalize();
+    this.scene.add(directionalLight);
+
+    this.blocks = new Blocks(this.scene, this.plane);
+
+    this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    this.renderer.setSize(this.width, this.height);
+    this.renderer.domElement.style.position = "absolute";
+    this.renderer.domElement.style.top = "0px";
+
+    this.stats = new Stats();
+    this.stats.domElement.style.position = "absolute";
+    this.stats.domElement.style.right = "0px";
+    this.stats.domElement.style.bottom = "0px";
+    this.stats.domElement.style.zIndex = 100;
+    this.stats.domElement.style.visibility = "hidden";
+
+    this.connectSocket();
+    this.setupEvents();
+    this.animate();
+
+    this.rootElement.append(this.stats.domElement);
+    this.rootElement.append(this.renderer.domElement);
+  }
+
+  setupEvents() {
+    window.addEventListener("resize", this.onWindowResize.bind(this), false);
+
+    this.rootElement.on("mousemove", this.onDocumentMouseMove.bind(this));
+    this.rootElement.on("mousedown", this.onDocumentMouseDown.bind(this));
+    // this.renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
+    // this.renderer.domElement.addEventListener( 'touchend', onDocumentTouchEnd, false);
+    $(document).on("keydown", this.onDocumentKeyDown.bind(this));
+    $(document).on("keypress", this.onDocumentKeyPress.bind(this));
+    $(document).on("keyup", this.onDocumentKeyUp.bind(this));
+  }
+
+  connectSocket() {
+    this.socket = io.connect(NODECRAFT_BACKEND);
+    this.socket.on("init", data => {
+      this.blocks.clear();
+      for (const pos of Object.keys(data)) {
+        this.blocks.insert(...pos.split(",").map(Number));
+      }
+    });
+    this.socket.on("insert", data => {
+      this.blocks.insert(...data);
+    });
+    this.socket.on("delete", data => {
+      this.blocks.delete(...data);
+    });
+    this.socket.on("clear", () => {
+      this.blocks.clear();
+    });
+    this.socket.on("connect_error", () => {
+      this.error();
+    });
+  }
+
+  // onDocumentTouchStart(event) {
   //   // event.preventDefault()
   //   return; // Does not work!
   //   let pointer = getPointerEvent(event);
@@ -207,162 +423,9 @@ export default (() => {
   //   }
   // }
 
-  // function onDocumentTouchEnd(event) {
+  //  onDocumentTouchEnd(event) {
   //   // event.preventDefault();
   // }
+}
 
-  function onDocumentKeyDown(event) {
-    const code = event.which || event.keyCode;
-    const char = String.fromCharCode(code);
-
-    keysdown[code] = true;
-
-    switch (char) {
-      case 'A':
-        autoRotate = false;
-        break;
-      case 'D':
-        autoRotate = false;
-        break;
-      default:
-    }
-  }
-
-  function onDocumentKeyPress(event) {
-    const code = event.which || event.keyCode;
-    let char = String.fromCharCode(code);
-
-    keysdown[code] = true;
-
-    char = char.toUpperCase();
-    switch (char) {
-      case 'Q':
-        if (stats.domElement.style.visibility === 'hidden') {
-          stats.domElement.style.visibility = 'visible';
-        }
-        else {
-          stats.domElement.style.visibility = 'hidden';
-        }
-        break;
-      case 'C':
-        clearBlocks();
-        break;
-      case 'G':
-        generateMap();
-        break;
-      case ' ':
-        autoRotate = !autoRotate;
-        event.preventDefault();
-        break;
-      default:
-    }
-  }
-
-  function onDocumentKeyUp(event) {
-    const code = event.which || event.keyCode;
-    const char = String.fromCharCode(code);
-
-    keysdown[code] = false;
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-
-    const delta = clock.getDelta();
-
-    if (mouse.x !== -1 && mouse.y !== -1) {
-      rollOverMesh.visible = true;
-
-      raycaster.setFromCamera(mouse, camera);
-
-      const intersects = raycaster.intersectObjects(objects);
-
-      if (intersects.length > 0) {
-        const intersect = intersects[0];
-
-        rollOverMesh.position.copy(intersect.point).add(intersect.face.normal);
-        rollOverMesh.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
-      }
-    }
-
-    if (autoRotate) {
-      angle += delta * 0.1;
-    }
-
-    if (keysdown[65]) { // a
-      angle += delta;
-    }
-
-    if (keysdown[68]) { // d
-      angle -= delta;
-    }
-
-    if (keysdown[83]) { // s
-      zoom = Math.min(2, zoom * 1.01);
-    }
-
-    if (keysdown[87]) { // w
-      zoom = Math.max(1, zoom / 1.01);
-    }
-
-    camera.position.x = Math.cos(angle) * 700 * zoom;
-    camera.position.y = 800 * zoom;
-    camera.position.z = Math.sin(angle) * 700 * zoom;
-    camera.lookAt(new THREE.Vector3());
-
-    renderer.render(scene, camera);
-
-    stats.update();
-  }
-
-  function onWindowResize() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }
-
-  function insertBlock(x, y, z) {
-    serverInsertBlock(x, y, z);
-    socket.emit('insert', [x, y, z]);
-  }
-
-  function serverInsertBlock(x, y, z) {
-    if (!([x, y, z] in blocks)) {
-      const voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
-      voxel.position.set(x, y, z).multiplyScalar(50).addScalar(25);
-      scene.add(voxel);
-      objects.push(voxel);
-      blocks[[x, y, z]] = voxel;
-    }
-  }
-
-  function deleteBlock(x, y, z) {
-    serverDeleteBlock(x, y, z);
-    socket.emit('delete', [x, y, z]);
-  }
-
-  function serverDeleteBlock(x, y, z) {
-    if ([x, y, z] in blocks) {
-      scene.remove(blocks[[x, y, z]]);
-      objects.splice(objects.indexOf(blocks[[x, y, z]]), 1);
-      delete blocks[[x, y, z]];
-    }
-  }
-
-  function clearBlocks() {
-    serverClearBlocks();
-    socket.emit('clear');
-  }
-
-  function serverClearBlocks() {
-    for (const pos of Object.keys(blocks)) {
-      serverDeleteBlock.apply(null, pos.split(',').map(Number));
-    }
-  }
-
-  function generateMap() {
-    socket.emit('generate');
-  }
-});
+export default Craft;
