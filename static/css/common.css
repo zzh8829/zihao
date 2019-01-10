@@ -39,3 +39,11 @@ code {
 .post h2 {
   margin-bottom: 1em;
 }
+
+.post h2.headline {
+  color: #555;
+}
+
+.archive .post-link {
+  color: #333
+}

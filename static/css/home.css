@@ -4,9 +4,17 @@
   user-select: none;
 }
 
+.profile h2 {
+  color: #444
+}
+
+#post-list a {
+  color: #000;
+}
+
 #post-list .summary {
   font: normal 17px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #666;
+  color: #111;
   max-width: 500px;
   margin-top: 2px;
   margin-left: 10px;
