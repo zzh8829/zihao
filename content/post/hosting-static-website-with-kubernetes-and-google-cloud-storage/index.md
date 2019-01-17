@@ -1,7 +1,7 @@
 +++
 categories = ["cloud"]
 date = "2018-03-26T21:07:14-04:00"
-description = "Hosting a Static Website with Kubernetes and Google Cloud Storage"
+description =  "Hosting a Static Website with Kubernetes and Google Cloud Storage"
 tags = ["gke", "kubernetes", "nginx", "s3"]
 title = "Hosting a Static Website with Kubernetes and Google Cloud Storage"
 
@@ -16,7 +16,7 @@ Once upon a time, I hosted the first version of my website on a small no-name vi
 
 ## The Architecture
 
-![architecture](/images/static-graph.png)
+![architecture](static-graph.png)
 
 All client requests are load balanced through the Kubernetes ingress controller. The traffic will then go through nginx containers which proxy the data from Google Cloud Storage.
 
@@ -24,7 +24,7 @@ All client requests are load balanced through the Kubernetes ingress controller.
 
 In my example the main bucket that stores everything is call "storage.zihao.me" and my static files are uplaoded to the "zihao.me" folder under the bucket.
 
-![gcs](/images/static-gcs.png)
+![gcs](static-gcs.png)
 
 No other additional settings are required, we just need to remember the exact path of our static files.
 
@@ -60,7 +60,7 @@ Since Google Cloud Storage is just a simple file storage engine, we need to do s
 
 With Nginx proxy ready, we also need to set up the corresponding kubernetes deployment.
 
-![kubernetes](/images/static-k8s.png)
+![kubernetes](static-k8s.png)
 
 We can simply used the official lightweight Nginx docker image at `nginx:alpine`.
 

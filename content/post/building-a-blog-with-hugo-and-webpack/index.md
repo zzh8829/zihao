@@ -1,7 +1,7 @@
 +++
 categories = ["web"]
 date = "2019-01-06T00:11:24-07:00"
-description = "This is a complete guide to the perfect blog setup using Hugo, Webpack 4 and Babel 7"
+description =  "This is a complete guide to the perfect blog setup using Hugo, Webpack 4 and Babel 7"
 tags = ["hugo", "webpack", "javascript", "babel", "gulp"]
 title = "The Perfect Blog Setup with Hugo, Webpack 4 and Babel 7 in 2019"
 
@@ -33,7 +33,7 @@ title = "My New Hugo Site"
 theme = "hyde"
 ```
 
-Note: baseURL `/` is very important because hugo tries to replace all links with fixed baseUrl like `https://zihao.me/images/favicon.png` which in my opinion is very lame because it only works when you are loading the site from the same domain. By setting it to `/`, the static files will work everywhere regardless of domain name.
+Note: baseURL `/` is very important because hugo tries to replace all links with fixed baseUrl like `https://zihao.mefavicon.png` which in my opinion is very lame because it only works when you are loading the site from the same domain. By setting it to `/`, the static files will work everywhere regardless of domain name.
 
 ```
 hugo server -D
@@ -41,7 +41,7 @@ hugo server -D
 
 Yay we have our blog live and running, amazing start.
 
-![first post](/images/hwb-hugo.png)
+![first post](hwb-hugo.png)
 
 ## Part Two: Webpack + Babel
 
@@ -122,7 +122,7 @@ echo '<script src="/js/firstpost.bundle.js"></script>' >> \
     ./content/posts/my-first-post.md
 ```
 
-![date](/images/hwb-date.png)
+![date](hwb-date.png)
 
 Amazing now we have ES6 integrated into our blog! The next step is getting it to reload automatically on file change.
 

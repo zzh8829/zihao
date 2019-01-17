@@ -1,7 +1,7 @@
 +++
 date = "2017-03-17T17:43:43-07:00"
 title = "Hello Hugo"
-description = "Starting a blog with Hugo"
+description =  "Starting a blog with Hugo"
 tags = ["random"]
 categories = ["other"]
 

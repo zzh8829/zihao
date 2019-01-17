@@ -1,7 +1,7 @@
 +++
 categories = ["cloud"]
 date = "2017-03-19T10:39:54-07:00"
-description = "How I bootstrapped a mini Kubernetes cluster on ubuntu linux from scratch with kubeadm and weave"
+description =  "How I bootstrapped a mini Kubernetes cluster on ubuntu linux from scratch with kubeadm and weave"
 tags = ["kubernetes", "docker", "cloud"]
 title = "Creating a Kubernetes Cluster from Scratch with Kubeadm"
 
@@ -88,7 +88,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/s
 kubectl proxy
 ```
 Congratulations, now we have a complete working single node Kubernetes *cluster*. You can check the status and explore a bit with dashboard at `localhost:8001/ui`
-![Kubernetes Dashboard](/images/kube-dash.png)
+![Kubernetes Dashboard](kube-dash.png)
 
 To join more nodes into our cluster, repeat the same commands as the master node above, except the `kubeadm init` is replaced with
 ```bash
@@ -195,7 +195,7 @@ kubectl apply -f deploy.yaml
 ```
 Point your domain DNS to the master server and after a while you will be able to see our example working at https://hello.cloud.zihao.me YAY!
 
-![Hello World](/images/kube-hello.png)
+![Hello World](kube-hello.png)
 
 * * *
 

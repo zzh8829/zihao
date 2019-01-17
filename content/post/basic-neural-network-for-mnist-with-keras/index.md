@@ -1,14 +1,14 @@
 +++
 tags = ["machine learning", "neural network", "keras", "kaggle"]
-description = "Setting up machine learning environment and training a basic neural network for MNIST with keras"
+description =  "Setting up machine learning environment and training a basic neural network for MNIST with keras"
 title = "Basic Neural Network for MNIST with Keras"
 date = "2017-03-29T15:26:24-07:00"
 categories = ["artificial intelligence"]
 
 +++
 
-This is a simple tutorial on a basic 97% accurate neural network model for MNIST digit classification. This model contains multiple RELU layers and dropouts layers with a softmax layer for prediction. 
-<!--more--> 
+This is a simple tutorial on a basic 97% accurate neural network model for MNIST digit classification. This model contains multiple RELU layers and dropouts layers with a softmax layer for prediction.
+<!--more-->
 
 Only less than 30 seconds of training time is required on my 15 inch Macbook. I strongly recommend using jupyter notebook, but normal python terminal is fine too.
 
@@ -48,7 +48,7 @@ print(train_images.shape, train_labels.shape, test_images.shape)
     sample_submission.csv
     test.csv
     train.csv
-    
+
     (42000, 784) (42000,) (28000, 784)
 
 
@@ -66,7 +66,7 @@ for i in range(begin,begin+n):
 ```
 
 
-![number images](/images/mnist-output_3_0.png)
+![number images](mnist-output_3_0.png)
 
 
 ### Process data for training
@@ -96,7 +96,7 @@ print(train_images.shape, train_labels.shape)
 ```python
 # Create a basic neural network
 # 64 relu -> 128 relu -> dropout 0.15
-# -> 64 relu -> dropout 0.15 -> softmax 10 
+# -> 64 relu -> dropout 0.15 -> softmax 10
 from keras.models import Sequential
 from keras.layers import Dense , Dropout
 
@@ -117,7 +117,7 @@ model.compile(optimizer=RMSprop(lr=0.001),
 
 ```python
 # Train our model with 15 steps using 90% for training and 10% for cross validation
-history=model.fit(train_images, train_labels, validation_split = 0.1, 
+history=model.fit(train_images, train_labels, validation_split = 0.1,
             epochs=15, batch_size=64)
 ```
 
@@ -200,7 +200,7 @@ plt.show()
 ```
 
 
-![history plot](/images/mnist-output_9_0.png)
+![history plot](mnist-output_9_0.png)
 
 
 ### Make prediction
@@ -217,11 +217,11 @@ submissions.to_csv("predictions.csv", index=False, header=True)
 
 Everything all together takes about 5 minutes, pretty good for 97% accuracy. There are many ways to improve the accuracy, I might write about them in future. The goal here is just to have a basic working setup and test submissions on Kaggle.
 
-![kaggle result](/images/mnist-kaggle.png)
+![kaggle result](mnist-kaggle.png)
 
 With this simple model we achieved 97.257% accuracy on test set.
 
-*** 
+***
 
 Thanks Poonam Ligade for posting her [Kaggle Kernel](https://www.kaggle.com/poonaml/digit-recognizer/deep-neural-network-keras-way)
 

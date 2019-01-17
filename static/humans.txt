@@ -13,7 +13,7 @@
 # TECHNOLOGY COLOPHON
 
     Frontend:
-      Hugo, nodejh, Three.js, jQuery, Font Awesome, highlights.js
+      Hugo, nodejh, Three.js, jQuery, Font Awesome, highlights.js, Webpack
     Backend:
       Kubernetes, Nginx, Elixir, Phoenix
     Server:
@@ -21,5 +21,5 @@
     Other:
       Docker, Github, LetsEncrypt, Namecheap
     Tools:
-      Sublime Text, ZShell, GitHub, scm_breeze, 
- 
+      Sublime Text, zsh, GitHub, scm_breeze,
+

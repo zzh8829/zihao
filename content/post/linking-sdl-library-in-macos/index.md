@@ -1,9 +1,9 @@
 +++
 categories = ["graphics"]
 date = "2017-06-19T14:32:43-04:00"
-description = ""
+description =  ""
 tags = ["SDL", "C++", "macOS"]
-title = ""
+title = "Linking SDL Library in MacOS"
 draft = true
 +++
 

@@ -1,5 +1,5 @@
 +++
-description = "Cheap Out Load Balancer on Google Container Engine"
+description =  "Cheap Out Load Balancer on Google Container Engine"
 title = "Custom Nginx Ingress Controller on Google Container Engine"
 date = "2017-04-23T23:26:07-07:00"
 categories = ["cloud"]

@@ -1,6 +1,6 @@
 +++
 date = "2017-08-03T18:00:46-04:00"
-description = "Solving CartPole with Deep Q Network"
+description =  "Solving CartPole with Deep Q Network"
 tags = ["machine learning", "openai", "artificial intelligence", "reinforcement learning"]
 title = "Solving CartPole with Deep Q Network"
 categories = ["artificial intelligence"]
@@ -9,7 +9,7 @@ categories = ["artificial intelligence"]
 CartPole is the classic game where you try to balance a pole by moving it horizontally. We will try to solve this with a reinforcement learning method called Deep Q Network.
 <!--more-->
 
-![CartPole](/images/cartpole.png)
+![CartPole](cartpole.png)
 
 ## Description
 
@@ -58,7 +58,7 @@ step_smr = tf.summary.scalar('steps', tf_steps)
 
 ## Result
 
-![CartPole Result](/images/cartpole-result.png)
+![CartPole Result](cartpole-result.png)
 
 We see that the network reached average of 200 steps per episode pretty quickly.
 
