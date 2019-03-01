@@ -18,7 +18,7 @@ import hashlib
 def md5_checksum(filename):
     m = hashlib.md5()
     with open(filename, 'rb') as f:
-        for data in iter(lambda: f.read(1024 * 1024), ''):
+        for data in iter(lambda: f.read(1024 * 1024), b''):
             m.update(data)
     return m.hexdigest()
 ```
@@ -32,7 +32,7 @@ import hashlib
 def etag_checksum(filename, chunk_size=8 * 1024 * 1024):
     md5s = []
     with open(filename, 'rb') as f:
-        for data in iter(lambda: f.read(chunk_size), ''):
+        for data in iter(lambda: f.read(chunk_size), b''):
             md5s.append(hashlib.md5(data).digest())
     m = hashlib.md5("".join(md5s))
     return '{}-{}'.format(m.hexdigest(), len(md5s))
