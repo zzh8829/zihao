@@ -12,6 +12,8 @@ Why live in the past when you can live on the EDGE! This is a complete guide to 
 
 I already talked about the reason I choose Hugo in the previous [blog post](/post/hello-hugo/). Hugo is indeed hands down one of the best static HTML generators, but what do we do about the JavasSript part of the website? Embeding scripts directly kinda works but what about ES6, modules, async/await and other amazing new features. The best solution is of couse babel and webpack. Integrating Webpack and Babel into Hugo adds maximum expressibility into your blog without lossing any simplicities from using a static site generator. With this setup, you will get browser hot-reload for both html and JavaScript on file change! This guide will assume you have `hugo`, `node` and `yarn` already installed. We will focus on the integration of webpack with hugo, for more custom configurations you can visit their officail websites.
 
+TLDR: clone the [Repo](https://github.com/zzh8829/hugo-webpack-babel-blog) and test it out yourself.
+
 ## Part One: Hugo
 
 Setting up Hugo is perhaps the easist part of the guide. We will use `testblog` as the name of our blog, you should substitute the name as needed.
@@ -217,4 +219,4 @@ Now the project is complete, you can start writing post and add some creative ef
 
 * * *
 
-The complete code sample is availble on [GitHub](https://github.com/zzh8829/testblog)
+The complete code sample is availble on [GitHub](https://github.com/zzh8829/hugo-webpack-babel-blog)
