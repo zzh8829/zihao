@@ -1,7 +1,38 @@
-#demo {
+#craft {
   height:100vh;
   background-color: rgb(240,240,240);
+}
+
+#craft-gl {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
   user-select: none;
+}
+
+#craft-gl:focus {
+  outline: none;
+}
+
+#craft-ui {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 540px) {
+  #craft-ui {
+    display: none;
+  }
+}
+
+#blog-nav {
+  display: none;
 }
 
 .profile h2 {

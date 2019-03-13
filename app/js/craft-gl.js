@@ -8,7 +8,7 @@ const NODECRAFT_BACKEND = "https://nodecraft.cloud.zihao.me";
 const BLOCK_SIZE = 50;
 const PLANE_SIZE = 10000;
 const BLOCK_COLOR = 0xfeb74c;
-const ROLL_OVER_COLOR = 0x1b5c5a;
+const ROLL_OVER_COLOR = 0x5badf0;
 
 class Blocks {
   constructor(scene, plane) {
@@ -18,30 +18,40 @@ class Blocks {
 
     // cubes
     this.cubeGeo = new THREE.BoxGeometry(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-    this.cubeMaterial = new THREE.MeshLambertMaterial({
-      color: BLOCK_COLOR,
-      flatShading: true
-    });
+    this.materials = {}
   }
 
-  delete(x, y, z) {
-    if ([x, y, z] in this.blocks) {
-      this.scene.remove(this.blocks[[x, y, z]]);
-      this.objects.splice(this.objects.indexOf(this.blocks[[x, y, z]]), 1);
-      delete this.blocks[[x, y, z]];
+  getMaterial(color) {
+    if (!color || color === true) {
+      color = BLOCK_COLOR;
+    }
+    if (!this.materials[color]) {
+      this.materials[color] = new THREE.MeshLambertMaterial({
+        color,
+        flatShading: true
+      });
+    }
+    return this.materials[color];
+  }
+
+  delete(pos) {
+    if (pos in this.blocks) {
+      this.scene.remove(this.blocks[pos]);
+      this.objects.splice(this.objects.indexOf(this.blocks[pos]), 1);
+      delete this.blocks[pos];
     }
   }
 
-  insert(x, y, z) {
-    if (!([x, y, z] in this.blocks)) {
-      const voxel = new THREE.Mesh(this.cubeGeo, this.cubeMaterial);
+  insert(pos, c) {
+    if (!(pos in this.blocks)) {
+      const voxel = new THREE.Mesh(this.cubeGeo, this.getMaterial(c));
       voxel.position
-        .set(x, y, z)
+        .set(...pos)
         .multiplyScalar(BLOCK_SIZE)
         .addScalar(BLOCK_SIZE / 2);
       this.scene.add(voxel);
       this.objects.push(voxel);
-      this.blocks[[x, y, z]] = voxel;
+      this.blocks[pos] = voxel;
     }
   }
 
@@ -70,9 +80,13 @@ class Craft {
     this.rollOverMesh = null;
 
     this.keysdown = {};
+    this.showGrid = true;
     this.autoRotate = true;
     this.angle = 0;
     this.zoom = 1;
+
+    this.removingBlock = false;
+    this.addMaterial = BLOCK_COLOR;
 
     this.renderer = null;
     this.stats = null;
@@ -97,14 +111,14 @@ class Craft {
     if (intersects.length > 0) {
       const intersect = intersects[0];
 
-      if (event.ctrlKey || event.metaKey) {
+      if (event.ctrlKey || event.metaKey || this.removingBlock) {
         // delete cube
         if (intersect.object !== this.plane) {
           const position = new THREE.Vector3()
             .copy(intersect.object.position)
             .divideScalar(BLOCK_SIZE)
             .floor();
-          this.deleteBlock(position.x, position.y, position.z);
+          this.deleteBlock([position.x, position.y, position.z]);
         }
       } else {
         // create cube
@@ -113,9 +127,13 @@ class Craft {
           .add(intersect.face.normal)
           .divideScalar(BLOCK_SIZE)
           .floor();
-        this.insertBlock(position.x, position.y, position.z);
+        this.insertBlock([position.x, position.y, position.z], this.addMaterial);
       }
     }
+  }
+
+  onDocumentMouseLeave() {
+    this.mouse = new THREE.Vector2(-1, -1);
   }
 
   onDocumentKeyDown(event) {
@@ -182,16 +200,29 @@ class Craft {
       if (intersects.length > 0) {
         const intersect = intersects[0];
 
-        this.rollOverMesh.position
-          .copy(intersect.point)
-          .add(intersect.face.normal);
+        if (this.removingBlock) {
+          if (intersect.object !== this.plane) {
+            this.rollOverMesh.position.copy(intersect.object.position);
+          } else {
+            this.rollOverMesh.visible = false
+          };
+        } else {
+          this.rollOverMesh.position
+            .copy(intersect.point)
+            .add(intersect.face.normal);
+        }
+
         this.rollOverMesh.position
           .divideScalar(BLOCK_SIZE)
           .floor()
           .multiplyScalar(BLOCK_SIZE)
           .addScalar(BLOCK_SIZE / 2);
       }
+    } else {
+      this.rollOverMesh.visible = false;
     }
+
+    this.line.visible = this.showGrid;
 
     if (this.autoRotate) {
       this.angle += delta * 0.1;
@@ -235,14 +266,19 @@ class Craft {
     this.renderer.setSize(this.width, this.height);
   }
 
-  insertBlock(x, y, z) {
-    this.blocks.insert(x, y, z);
-    this.socket.emit("insert", [x, y, z]);
+  insertBlock(pos, c) {
+    this.blocks.insert(pos, c);
+    this.socket.emit("insert", {
+      pos,
+      material: c
+    });
   }
 
-  deleteBlock(x, y, z) {
-    this.blocks.delete(x, y, z);
-    this.socket.emit("delete", [x, y, z]);
+  deleteBlock(pos) {
+    this.blocks.delete(pos);
+    this.socket.emit("delete", {
+      pos
+    });
   }
 
   clearBlocks() {
@@ -305,15 +341,13 @@ class Craft {
       lineGeo.vertices.push(new THREE.Vector3(i, 0, -size));
       lineGeo.vertices.push(new THREE.Vector3(i, 0, size));
     }
-    const line = new THREE.LineSegments(
+    this.line = new THREE.LineSegments(
       lineGeo,
       new THREE.LineBasicMaterial({
-        color: 0x000000,
-        opacity: 0.2,
-        transparent: true
+        color: 0xbcbcbc
       })
     );
-    this.scene.add(line);
+    this.scene.add(this.line);
 
     const planeGeo = new THREE.PlaneBufferGeometry(PLANE_SIZE, PLANE_SIZE);
     planeGeo.rotateX(-Math.PI / 2);
@@ -345,7 +379,7 @@ class Craft {
     this.stats.domElement.style.position = "absolute";
     this.stats.domElement.style.right = "0px";
     this.stats.domElement.style.bottom = "0px";
-    this.stats.domElement.style.zIndex = 100;
+    this.stats.domElement.style.zIndex = 10000;
     this.stats.domElement.style.visibility = "hidden";
 
     this.connectSocket();
@@ -361,26 +395,27 @@ class Craft {
 
     this.rootElement.on("mousemove", this.onDocumentMouseMove.bind(this));
     this.rootElement.on("mousedown", this.onDocumentMouseDown.bind(this));
-    // this.renderer.domElement.addEventListener( 'touchstart', onDocumentTouchStart, false );
-    // this.renderer.domElement.addEventListener( 'touchend', onDocumentTouchEnd, false);
-    $(document).on("keydown", this.onDocumentKeyDown.bind(this));
-    $(document).on("keypress", this.onDocumentKeyPress.bind(this));
-    $(document).on("keyup", this.onDocumentKeyUp.bind(this));
+    this.rootElement.on("mouseleave", this.onDocumentMouseLeave.bind(this));
+    this.rootElement.on('touchstart', this.onDocumentTouchStart.bind(this), false);
+    this.rootElement.on("keydown", this.onDocumentKeyDown.bind(this));
+    this.rootElement.on("keypress", this.onDocumentKeyPress.bind(this));
+    this.rootElement.on("keyup", this.onDocumentKeyUp.bind(this));
   }
 
   connectSocket() {
     this.socket = io.connect(NODECRAFT_BACKEND);
     this.socket.on("init", data => {
       this.blocks.clear();
+      console.log(data)
       for (const pos of Object.keys(data)) {
-        this.blocks.insert(...pos.split(",").map(Number));
+        this.blocks.insert(pos.split(',').map(Number), data[pos]);
       }
     });
     this.socket.on("insert", data => {
-      this.blocks.insert(...data);
+      this.blocks.insert(data.pos, data.material);
     });
     this.socket.on("delete", data => {
-      this.blocks.delete(...data);
+      this.blocks.delete(data.pos);
     });
     this.socket.on("clear", () => {
       this.blocks.clear();
@@ -390,38 +425,42 @@ class Craft {
     });
   }
 
-  // onDocumentTouchStart(event) {
-  //   // event.preventDefault()
-  //   return; // Does not work!
-  //   let pointer = getPointerEvent(event);
-  //   let currX = pointer.pageX;
-  //   let currY = pointer.pageY;
+  onDocumentTouchStart(event) {
+    event.preventDefault();
+    return; // not tested
+    // let pointer = event.originalEvent.targetTouches ? event.originalEvent.targetTouches[0] : event;
 
-  //   mouse.set((currX / width) * 2 - 1, - (currY / height) * 2 + 1);
+    var x = event.pageX - this.rootElement.offset().left;
+    var y = event.pageY - this.rootElement.offset().top;
 
-  //   raycaster.setFromCamera(mouse, camera);
+    this.mouse.set((x / this.width) * 2 - 1, -(y / this.height) * 2 + 1);
+    this.raycaster.setFromCamera(this.mouse, this.camera);
 
-  //   let intersects = raycaster.intersectObjects(objects);
+    const intersects = this.raycaster.intersectObjects(this.blocks.objects);
 
-  //   if (intersects.length > 0) {
-  //     let intersect = intersects[0];
-  //     if (clickTimer == null) {
-  //       clickTimer = setTimeout(function () {
-  //         clickTimer = null;
-  //         let position = new THREE.Vector3().copy(intersect.point).add(intersect.face.normal).divideScalar(50).floor();
-  //         insertBlock(position.x, position.y, position.z);
-  //       }, 300);
-  //     } else {
-  //       clearTimeout(clickTimer);
-  //       clickTimer = null;
+    if (intersects.length > 0) {
+      const intersect = intersects[0];
 
-  //       if (intersect.object != plane) {
-  //         let position = new THREE.Vector3().copy(intersect.object.position).divideScalar(50).floor();
-  //         deleteBlock(position.x, position.y, position.z);
-  //       }
-  //     }
-  //   }
-  // }
+      if (event.ctrlKey || event.metaKey) {
+        // delete cube
+        if (intersect.object !== this.plane) {
+          const position = new THREE.Vector3()
+            .copy(intersect.object.position)
+            .divideScalar(BLOCK_SIZE)
+            .floor();
+          this.deleteBlock(position.x, position.y, position.z);
+        }
+      } else {
+        // create cube
+        const position = new THREE.Vector3()
+          .copy(intersect.point)
+          .add(intersect.face.normal)
+          .divideScalar(BLOCK_SIZE)
+          .floor();
+        this.insertBlock(position.x, position.y, position.z);
+      }
+    }
+  }
 
   //  onDocumentTouchEnd(event) {
   //   // event.preventDefault();

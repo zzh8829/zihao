@@ -37,15 +37,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-light.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/css/style.css">
-    
+
     {{ range .Site.Params.customCSS }}
     <link rel="stylesheet" href="/{{ . }}">
     {{ end }}
 
-    {{ if .IsHome }} 
+    {{ if .IsHome }}
     <link rel="stylesheet" href="/css/home.css">
     {{ end }}
-    
+
     {{ if .Site.Params.enableRSS }}
     <link href="{{ .Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
     {{ end }}

@@ -1,5 +1,6 @@
 import "./common";
-import Craft from "./craft";
+import Craft from './craft-gl';
+import CraftUI from "./craft-ui";
 
 $(function() {
   $('a[href^="#"]').on("click", function(e) {
@@ -22,23 +23,25 @@ if (window.location.hash) {
   blognav.hide();
 }
 
-window.craft = new Craft($("#demo"));
+window.craft = new Craft($("#craft-gl"));
 window.craft.error = () => {
+  console.log('Craft crashed :(');
   homeEnabled = false;
   switchMode("blog");
-  $("#demo").hide();
-  $("#demo-nav").hide();
+  $("#craft").hide();
+  $("#craft-nav").hide();
 };
 window.craft.run();
+CraftUI('craft-ui');
 
 function switchMode(mode) {
   if (mode == "blog") {
-    blognav.show();
+    blognav.css('display', 'flex');
     homenav.hide();
     $('nav > a[href="#blog"]').addClass("active");
   } else if (mode == "home" && homeEnabled) {
+    homenav.css('display', 'flex');
     blognav.hide();
-    homenav.show();
     $('nav > a[href="#blog"]').removeClass("active");
   }
 }

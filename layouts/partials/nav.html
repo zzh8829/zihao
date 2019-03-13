@@ -3,21 +3,21 @@
   <a href='/' class="nav-logo"> {{ with .Site.Title }}{{ . }}{{ else }}Logo{{ end }}</a>
 
   <a href='#blog'>Blog</a>
-  <a href='https://seafile.zihao.me'>Cloud</a>
   <a href='https://github.com/zzh8829?tab=repositories'>GitHub</a>
+  <a href='https://linkedin.com/in/zzh8829'>LinkedIn</a>
   <a href='/resume.pdf'>Resume</a>
   <a href='/about'>{{ with .Site.Params.about }}{{ . }}{{ else }}About{{ end }}</a>
 </nav>
 {{ end }}
 <nav id="blog-nav" class="main-nav" >
   {{ $url := replace .Permalink .Site.BaseURL "" }}
-  
+
   {{ if .IsHome }}
-  <a href='#demo' id='demo-nav'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
-  <a href='#blog'>Blog</a>
+    <a href='#craft' id='craft-nav'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
+    <a href='#blog'>Blog</a>
   {{ else }}
-  <a href='/'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
-  <a href='/#blog'>←Blog</a>
+    <a href='/'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
+    <a href='/#blog'>←Blog</a>
   {{ end }}
 
   <a href='/post'>{{ with .Site.Params.archive }}{{ . }}{{ else }}Archive{{ end }}</a>
@@ -25,7 +25,7 @@
   <a href='/tags'>{{ with .Site.Params.about }}{{ . }}{{ else }}Tags{{ end }}</a>
 
   <a href='/about'>{{ with .Site.Params.about }}{{ . }}{{ else }}About{{ end }}</a>
-  
+
   {{ range $key, $val := .Site.Params.Links }}
     <a href="{{ $val }}">{{ $key }}</a>
   {{ end }}

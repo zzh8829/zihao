@@ -3,7 +3,7 @@
 }
 
 #footer {
-  border-top: 1px solid rgba(0,0,0,.05);
+  border-top: 1px solid rgb(201, 201, 201);
 }
 
 @media screen and (max-width: 540px) {
@@ -19,6 +19,10 @@
 .post h2 {
   font-weight: bold;
   color: #333;
+}
+
+nav {
+  z-index: 1500 !important;
 }
 
 ul {
