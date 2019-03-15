@@ -31,7 +31,6 @@
     "@tweenjs/tween.js": "^17.3.0",
     "react": "^16.8.4",
     "react-color": "^2.17.0",
-    "react-dom": "^16.8.4",
-    "react-spring": "^8.0.15"
+    "react-dom": "^16.8.4"
   }
 }

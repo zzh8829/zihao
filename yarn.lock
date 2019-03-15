@@ -650,7 +650,7 @@
     pirates "^4.0.0"
     source-map-support "^0.5.9"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0":
   version "7.3.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.4.tgz#73d12ba819e365fcf7fd152aed56d6df97d21c83"
   integrity sha512-IvfvnMdSaLBateu0jfsYIpZTxAc2cKEXEMiezGGN75QcBcecDUKd3PgLAncT0oOgxKy8dd8hrJKj9MfzgfZd6g==
@@ -4908,13 +4908,6 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
-
-react-spring@^8.0.15:
-  version "8.0.15"
-  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-8.0.15.tgz#050d54edc334582c858bc100182d37bd7ab61d59"
-  integrity sha512-VXeqy7FCaNPiIPe1Yk4R4yfQn+BwJEofJ1Jkib7iAFouJJE7eUMhiReszYWYztCekmCAQvmsCxlOEKGK8J2O1w==
-  dependencies:
-    "@babel/runtime" "^7.3.1"
 
 react-transition-group@^2.2.1:
   version "2.6.0"
