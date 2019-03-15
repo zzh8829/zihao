@@ -1,3 +1,4 @@
+import TWEEN from '@tweenjs/tween.js';
 const WEBGL = window.WEBGL; // import hacks;
 const THREE = window.THREE;
 const Stats = window.Stats;
@@ -84,6 +85,8 @@ class Craft {
     this.autoRotate = true;
     this.angle = 0;
     this.zoom = 1;
+
+    this.props = { zoom: 1}
 
     this.removingBlock = false;
     this.addMaterial = BLOCK_COLOR;
@@ -185,8 +188,9 @@ class Craft {
     this.keysdown[code] = false;
   }
 
-  animate() {
+  animate(time) {
     requestAnimationFrame(this.animate.bind(this));
+    TWEEN.update(time);
 
     const delta = this.clock.getDelta();
 
@@ -237,6 +241,8 @@ class Craft {
     if (this.keysdown[68]) {
       this.angle -= delta;
     }
+
+    this.zoom = this.props.zoom;
 
     // s
     if (this.keysdown[83]) {
@@ -384,7 +390,7 @@ class Craft {
 
     this.connectSocket();
     this.setupEvents();
-    this.animate();
+    requestAnimationFrame(this.animate.bind(this));
 
     this.rootElement.append(this.stats.domElement);
     this.rootElement.append(this.renderer.domElement);
@@ -396,7 +402,7 @@ class Craft {
     this.rootElement.on("mousemove", this.onDocumentMouseMove.bind(this));
     this.rootElement.on("mousedown", this.onDocumentMouseDown.bind(this));
     this.rootElement.on("mouseleave", this.onDocumentMouseLeave.bind(this));
-    this.rootElement.on('touchstart', this.onDocumentTouchStart.bind(this), false);
+    // this.rootElement.on('touchstart', this.onDocumentTouchStart.bind(this), false);
     this.rootElement.on("keydown", this.onDocumentKeyDown.bind(this));
     this.rootElement.on("keypress", this.onDocumentKeyPress.bind(this));
     this.rootElement.on("keyup", this.onDocumentKeyUp.bind(this));
@@ -406,7 +412,6 @@ class Craft {
     this.socket = io.connect(NODECRAFT_BACKEND);
     this.socket.on("init", data => {
       this.blocks.clear();
-      console.log(data)
       for (const pos of Object.keys(data)) {
         this.blocks.insert(pos.split(',').map(Number), data[pos]);
       }

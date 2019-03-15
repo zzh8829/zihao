@@ -24,7 +24,7 @@ import HistoryIcon from '@material-ui/icons/History';
 import HelpIcon from '@material-ui/icons/Help';
 import { TwitterPicker } from 'react-color'
 import Popover from '@material-ui/core/Popover';
-import Fade from '@material-ui/core/Fade';
+import TWEEN from '@tweenjs/tween.js'
 
 const styles = theme => ({
     drawer: {
@@ -78,6 +78,7 @@ const styles = theme => ({
 const LeftDrawer = ({ classes }) => {
     const [open, setOpen] = useState(false);
     const [tool, setTool] = useState('add');
+    const [zoom, setZoom] = useState(1);
     const [material, setMaterial] = useState('#feb74c');
     const [pickerAnchor, setPickerAnchor] = useState(null);
     const [autoRotate, setAutoRotate] = useState(true);
@@ -104,9 +105,16 @@ const LeftDrawer = ({ classes }) => {
         window.craft.showGrid = showGrid;
     }, [showGrid]);
 
-    const setZoom = (zoom) => {
-        window.craft.zoom = Math.max(0.8, Math.min(1.6, window.craft.zoom * zoom))
+    const zoomIn = (ratio) => {
+        setZoom(Math.max(0.7, Math.min(1.5, zoom * ratio)))
     }
+
+    useEffect(() => {
+        new TWEEN.Tween(window.craft.props) // Create a new tween that modifies 'coords'.
+            .to({ zoom }, 400)
+            .easing(TWEEN.Easing.Quadratic.Out) // Use an easing function to make the animation smooth.
+            .start();
+    }, [zoom])
 
     return (
         <Drawer
@@ -164,11 +172,11 @@ const LeftDrawer = ({ classes }) => {
                     <ListItemText className={classes.text} primary={'Show Gird'} />
                 </ListItem>
                 <Divider />
-                <ListItem button onClick={() => setZoom(0.95)}>
+                <ListItem button onClick={() => zoomIn(0.9)}>
                     <ZoomInIcon />
                     <ListItemText className={classes.text} primary={'Zoom In'} />
                 </ListItem>
-                <ListItem button onClick={() => setZoom(1.05)}>
+                <ListItem button onClick={() => zoomIn(1.1)}>
                     <ZoomOutIcon />
                     <ListItemText className={classes.text} primary={'Zoom Out'} />
                 </ListItem>

@@ -14,6 +14,10 @@
   .post {
     padding: 0px;
   }
+
+  .profile #header {
+    padding-bottom: 0px;
+  }
 }
 
 .post h2 {
@@ -23,6 +27,12 @@
 
 nav {
   z-index: 1500 !important;
+}
+
+@media screen and (max-width: 540px) {
+  nav .hide-on-mobile {
+    display: none;
+  }
 }
 
 ul {

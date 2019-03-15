@@ -3,8 +3,8 @@
   <a href='/' class="nav-logo"> {{ with .Site.Title }}{{ . }}{{ else }}Logo{{ end }}</a>
 
   <a href='#blog'>Blog</a>
-  <a href='https://github.com/zzh8829?tab=repositories'>GitHub</a>
-  <a href='https://linkedin.com/in/zzh8829'>LinkedIn</a>
+  <a href='https://github.com/zzh8829?tab=repositories' class="hide-on-mobile">GitHub</a>
+  <a href='https://linkedin.com/in/zzh8829' class="hide-on-mobile">LinkedIn</a>
   <a href='/resume.pdf'>Resume</a>
   <a href='/about'>{{ with .Site.Params.about }}{{ . }}{{ else }}About{{ end }}</a>
 </nav>
@@ -31,6 +31,6 @@
   {{ end }}
 
   {{ if .Site.Params.enableRSS }}
-  <a class="cta" href="{{ .Site.RSSLink }}">{{ with .Site.Params.subscribe }}{{ . }}{{ else }}Subscribe{{ end }}</a>
+  <a class="cta hide-on-mobile" href="{{ .Site.RSSLink }}">{{ with .Site.Params.subscribe }}{{ . }}{{ else }}Subscribe{{ end }}</a>
   {{ end }}
 </nav>
