@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -25,6 +25,7 @@ import HelpIcon from '@material-ui/icons/Help';
 import { TwitterPicker } from 'react-color'
 import Popover from '@material-ui/core/Popover';
 import TWEEN from '@tweenjs/tween.js'
+import { SettingsContext } from './SettingsContext';
 
 const styles = theme => ({
     drawer: {
@@ -83,6 +84,7 @@ const LeftDrawer = ({ classes }) => {
     const [pickerAnchor, setPickerAnchor] = useState(null);
     const [autoRotate, setAutoRotate] = useState(true);
     const [showGrid, setShowGrid] = useState(true);
+    const settings = useContext(SettingsContext);
 
     useEffect(() => {
         if (tool === 'add') {
@@ -100,6 +102,10 @@ const LeftDrawer = ({ classes }) => {
     useEffect(() => {
         window.craft.autoRotate = autoRotate;
     }, [autoRotate]);
+
+    useEffect(() => {
+        window.craft.showGrid = showGrid;
+    }, [showGrid]);
 
     useEffect(() => {
         window.craft.showGrid = showGrid;
@@ -171,6 +177,10 @@ const LeftDrawer = ({ classes }) => {
                     }
                     <ListItemText className={classes.text} primary={'Show Gird'} />
                 </ListItem>
+                <ListItem button onClick={() => settings.set({showHistory: !settings.showHistory})}>
+                    <HistoryIcon className={classNames({ [classes.enabled]: settings.showHistory })}/>
+                    <ListItemText className={classes.text} primary={'View History'} />
+                </ListItem>
                 <Divider />
                 <ListItem button onClick={() => zoomIn(0.9)}>
                     <ZoomInIcon />
@@ -181,10 +191,6 @@ const LeftDrawer = ({ classes }) => {
                     <ListItemText className={classes.text} primary={'Zoom Out'} />
                 </ListItem>
                 {/* <ListItem button onClick={() => null}>
-                    <HistoryIcon />
-                    <ListItemText className={classes.text} primary={'View History'} />
-                </ListItem>
-                <ListItem button onClick={() => null}>
                     <HelpIcon />
                     <ListItemText className={classes.text} primary={'View Help'} />
                 </ListItem> */}

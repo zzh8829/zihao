@@ -58,7 +58,7 @@ class Blocks {
 
   clear() {
     for (const pos of Object.keys(this.blocks)) {
-      this.delete(...pos.split(",").map(Number));
+      this.delete(pos.split(",").map(Number));
     }
   }
 }
