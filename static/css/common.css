@@ -68,3 +68,20 @@ code {
 .archive .post-link {
   color: #333
 }
+
+a.symbol {
+  color: #555
+}
+
+a.symbol:hover {
+  color: #5badf0;
+}
+
+p.small {
+  color: #555
+}
+
+nav .cta:hover {
+  border-radius: 3px;
+  color: #5badf0;
+}
