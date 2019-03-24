@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from 'react';
+import React, { memo, Suspense, useContext } from 'react';
 import fetchResource from 'fetch-suspense';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -16,32 +16,45 @@ const styles = theme => ({
     card: {
         background: "rgba(255, 255, 255, 0.7)",
         pointerEvents: 'auto',
-        margin: 40
+        margin: 40,
+        maxHeight: "calc(100% - 80px)",
+        display: 'flex',
+        flexDirection: 'column'
     },
     cardHeader: {
-        paddingBottom: 0
+        paddingBottom: 0,
+        flex: '0 0 auto'
+    },
+    spinner: {
+        display: 'flex',
+        justifyContent: 'center',
+        margin: 20,
+    },
+    list: {
+        flex: '0 1 auto',
+        overflowY: 'scroll'
     }
 });
 
-const MapCacheList = () => {
+const MapCacheList = withStyles(styles)(memo(({classes}) => {
     const cache = fetchResource('https://nodecraft.cloud.zihao.me/mapcache')
     return (
-        <List>
-            {cache.reverse().map(({ tag, data }, i) => {
+        <List className={classes.list}>
+            {cache.slice().reverse().map(({ tag, data }, i) => {
                 return <ListItem key={i} button onClick={() => {
                     window.craft.clearBlocks();
                     for (const pos of Object.keys(data)) {
                         window.craft.insertBlock(pos.split(',').map(Number), data[pos]);
                     }
                 }}>
-                    <ListItemText primary={`World #${i}: ${tag}`} />
+                    <ListItemText primary={`World #${cache.length - i}: ${tag}`} />
                 </ListItem>
             })}
         </List>
     )
-}
+}))
 
-const HistoryCard = (props) => {
+const HistoryCard = memo((props) => {
     const { classes } = props;
     const settings = useContext(SettingsContext);
 
@@ -60,12 +73,16 @@ const HistoryCard = (props) => {
                     </IconButton>
                 }
             />
-            <Suspense fallback={<CircularProgress />}>
+            <Suspense fallback={
+                <div className={classes.spinner}>
+                    <CircularProgress/>
+                </div>
+            }>
                 <MapCacheList />
             </Suspense>
         </Card>
     );
-}
+})
 
 HistoryCard.propTypes = {
     classes: PropTypes.object.isRequired,
