@@ -265,8 +265,8 @@ class Craft {
   }
 
   onWindowResize() {
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
+    this.width = this.rootElement.innerWidth();
+    this.height = this.rootElement.innerHeight();
     this.camera.aspect = this.width / this.height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.width, this.height);
@@ -304,8 +304,8 @@ class Craft {
 
     THREE.ImageUtils.crossOrigin = "";
 
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
+    this.width = this.rootElement.innerWidth();
+    this.height = this.rootElement.innerHeight();
 
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(
