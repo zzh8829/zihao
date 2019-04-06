@@ -7,7 +7,7 @@ Zihao Zhang's person website powered by:
 - Hugo: Static HTML generator
 - Webpack: JavaScript packer
 - Gulp: Build pipeline
--
+
 
 ---
 
@@ -18,18 +18,19 @@ brew install hugo
 brew install node
 
 yarn install
-yarn watch
+yarn start
 ```
 
 ## Publish Site
 ```
 yarn deploy
+# or
 yarn deploy-gitlab
 ```
 
 ## All Commands
 ```
-watch           # Build + watch + dev server
+start           # Dev Build + Watch
 build           # Build production
 clean           # Clean artifacts
 deploy          # Deploy with Google Cloud Storage
