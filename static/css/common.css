@@ -1,5 +1,5 @@
 .wrapper:first-of-type {
-  padding-top: 60px;
+  padding-top: 70px;
 }
 
 #footer {
@@ -11,12 +11,22 @@
     padding: 15px!important;
   }
 
+  .wrapper:first-of-type {
+    padding-top: 30px;
+  }
+
   .post {
     padding: 0px;
   }
 
   .profile #header {
     padding-bottom: 0px;
+  }
+
+  blockquote {
+    padding: 0 0.3rem 0 0.8rem;
+    border-left: 2px solid #5badf0;
+    margin-inline-start: 0.3rem;
   }
 }
 
@@ -25,8 +35,13 @@
   color: #333;
 }
 
-nav {
+nav.main-nav {
   z-index: 1500 !important;
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.12);
+}
+
+#post-nav a {
+  font: 500 17px/1.8 "Helvetica Neue", helvetica, Arial, sans-serif;
 }
 
 @media screen and (max-width: 540px) {

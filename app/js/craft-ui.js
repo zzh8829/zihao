@@ -1,4 +1,4 @@
-import React, { StrictMode, memo, Suspense, useEffect, lazy } from 'react';
+import React, { memo } from 'react';
 import { render } from 'react-dom'
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';

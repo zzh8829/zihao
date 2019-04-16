@@ -57,7 +57,7 @@ const HelpCard = (props) => {
                     What is this ?
                 </Typography>
                 <Typography>
-                    ZZ's block world is a multiplayer interactive experience. Everything you see here is synchronized across all users in real-time.
+                    ZZ's block world is a multiplayer interactive experience. Everything you see here is synchronized across all players in real-time.
                 </Typography>
                 <Typography style={{
                     // color: settings.material,

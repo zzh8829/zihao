@@ -10,14 +10,15 @@
 </nav>
 {{ end }}
 <nav id="blog-nav" class="main-nav" >
-  {{ $url := replace .Permalink .Site.BaseURL "" }}
-
   {{ if .IsHome }}
-    <a href='#craft' id='craft-nav'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
+    <a href='#craft' class="nav-logo hide-on-mobile"> {{ with .Site.Title }}{{ . }}{{ else }}Logo{{ end }}</a>
+
+    <a href='#craft' id='craft-nav'>⬆Home</a>
     <a href='#blog'>Blog</a>
   {{ else }}
-    <a href='/'>{{ with .Site.Params.home }}{{ . }}{{ else }}Home{{ end }}</a>
-    <a href='/#blog'>←Blog</a>
+    <a href='/' class="nav-logo"> {{ with .Site.Title }}{{ . }}{{ else }}Logo{{ end }}</a>
+
+    <a href='/#blog'>Blog</a>
   {{ end }}
 
   <a href='/post'>{{ with .Site.Params.archive }}{{ . }}{{ else }}Archive{{ end }}</a>
