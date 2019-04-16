@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import RightBox from './components/RightBox';
+import HelpBox from './components/HelpBox';
 import LeftDrawer from './components/LeftDrawer';
 import { SettingsProvider } from './components/SettingsContext';
 
@@ -24,6 +25,7 @@ const Container = withStyles(styles)(memo(({ classes }) => {
         <div className={classes.container}>
             <LeftDrawer />
             <RightBox />
+            <HelpBox />
         </div>
     )
 }));

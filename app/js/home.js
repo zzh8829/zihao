@@ -23,16 +23,18 @@ if (window.location.hash) {
   blognav.hide();
 }
 
-window.craft = new Craft($("#craft-gl"));
-window.craft.error = () => {
-  console.log('Craft crashed :(');
-  homeEnabled = false;
-  switchMode("blog");
-  $("#craft").hide();
-  $("#craft-nav").hide();
-};
-window.craft.run();
-CraftUI('craft-ui');
+$(() => {
+  window.craft = new Craft($("#craft-gl"));
+  window.craft.error = () => {
+    console.log('Craft crashed :(');
+    homeEnabled = false;
+    switchMode("blog");
+    $("#craft").hide();
+    $("#craft-nav").hide();
+  };
+  window.craft.run()
+  CraftUI('craft-ui')
+});
 
 function switchMode(mode) {
   if (mode == "blog") {

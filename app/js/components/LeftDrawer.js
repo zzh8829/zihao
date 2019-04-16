@@ -21,7 +21,7 @@ import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 import HistoryIcon from '@material-ui/icons/History';
-import HelpIcon from '@material-ui/icons/Help';
+import HelpIcon from '@material-ui/icons/HelpOutline';
 import { TwitterPicker } from 'react-color'
 import Popover from '@material-ui/core/Popover';
 import TWEEN from '@tweenjs/tween.js'
@@ -84,7 +84,7 @@ const LeftDrawer = ({ classes }) => {
     const [pickerAnchor, setPickerAnchor] = useState(null);
     const [autoRotate, setAutoRotate] = useState(true);
     const [showGrid, setShowGrid] = useState(true);
-    const settings = useContext(SettingsContext);
+    const [settings, dispatch] = useContext(SettingsContext);
 
     useEffect(() => {
         if (tool === 'add') {
@@ -97,6 +97,10 @@ const LeftDrawer = ({ classes }) => {
 
     useEffect(() => {
         window.craft.addMaterial = material;
+        dispatch({
+            type: 'SET',
+            settings: { material },
+        })
     }, [material]);
 
     useEffect(() => {
@@ -177,9 +181,19 @@ const LeftDrawer = ({ classes }) => {
                     }
                     <ListItemText className={classes.text} primary={'Show Gird'} />
                 </ListItem>
-                <ListItem button onClick={() => settings.set({showHistory: !settings.showHistory})}>
+                <ListItem button onClick={() => dispatch({
+                    type: 'TOGGLE_RIGHT_BOX',
+                    toggle: 'history'
+                })}>
                     <HistoryIcon className={classNames({ [classes.enabled]: settings.showHistory })}/>
                     <ListItemText className={classes.text} primary={'View History'} />
+                </ListItem>
+                <ListItem button onClick={() => dispatch({
+                    type: 'TOGGLE_RIGHT_BOX',
+                    toggle: 'help'
+                })}>
+                    <HelpIcon className={classNames({ [classes.enabled]: settings.showHelp })}/>
+                    <ListItemText className={classes.text} primary={'View Help'} />
                 </ListItem>
                 <Divider />
                 <ListItem button onClick={() => zoomIn(0.9)}>
@@ -190,16 +204,12 @@ const LeftDrawer = ({ classes }) => {
                     <ZoomOutIcon />
                     <ListItemText className={classes.text} primary={'Zoom Out'} />
                 </ListItem>
-                {/* <ListItem button onClick={() => null}>
-                    <HelpIcon />
-                    <ListItemText className={classes.text} primary={'View Help'} />
-                </ListItem> */}
             </List>
             <Popover open={Boolean(pickerAnchor)} anchorEl={pickerAnchor} anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left',
             }} onClose={() => setPickerAnchor(null)}>
-                <TwitterPicker color={material} onChange={(c) => {
+                <TwitterPicker color={material} onChangeComplete={(c) => {
                     setPickerAnchor(null); setMaterial(c.hex);
                 }} />
             </Popover>

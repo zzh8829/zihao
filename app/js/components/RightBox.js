@@ -36,7 +36,7 @@ const styles = theme => ({
     }
 });
 
-const MapCacheList = withStyles(styles)(memo(({classes}) => {
+const MapCacheList = withStyles(styles)(memo(({ classes }) => {
     const cache = fetchResource('https://nodecraft.cloud.zihao.me/mapcache')
     return (
         <List className={classes.list}>
@@ -56,7 +56,7 @@ const MapCacheList = withStyles(styles)(memo(({classes}) => {
 
 const HistoryCard = memo((props) => {
     const { classes } = props;
-    const settings = useContext(SettingsContext);
+    const [settings, dispatch] = useContext(SettingsContext);
 
     return (settings.showHistory &&
         <Card className={classes.card}>
@@ -67,7 +67,7 @@ const HistoryCard = memo((props) => {
                 action={
                     <IconButton
                         className={classes.button} color="secondary" aria-label="Close"
-                        onClick={() => settings.set({ showHistory: false })}
+                        onClick={() => dispatch({ type: 'SET', settings: { showHistory: false } })}
                     >
                         <CloseIcon />
                     </IconButton>
@@ -75,7 +75,7 @@ const HistoryCard = memo((props) => {
             />
             <Suspense fallback={
                 <div className={classes.spinner}>
-                    <CircularProgress/>
+                    <CircularProgress />
                 </div>
             }>
                 <MapCacheList />
