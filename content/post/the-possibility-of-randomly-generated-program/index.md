@@ -1,10 +1,9 @@
 +++
 title = "The Possibility of a Randomly Generated Program"
-description =  ""
-tags = ["random"]
+description =  "The Possibility of a Randomly Generated Program"
+tags = ["random", "artificial-intelligence", "neural-network"]
 categories = ["other"]
 date = 2019-05-27T16:53:45-04:00
-draft = true
 +++
 
 I got bored today and started thinking about the possibility of randomly generating a
