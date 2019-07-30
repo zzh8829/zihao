@@ -17,6 +17,7 @@ Zihao Zhang's person website powered by:
 brew install hugo
 brew install node
 
+git submodule update --init	
 yarn install
 yarn start
 ```
