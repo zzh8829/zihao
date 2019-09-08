@@ -72,7 +72,7 @@ const styles = theme => ({
         fontSize: '1rem'
     },
     text: {
-        marginLeft: 2
+        marginLeft: '1.5rem'
     }
 });
 

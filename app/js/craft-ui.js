@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import { render } from 'react-dom'
 import { withStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import RightBox from './components/RightBox';
 import HelpBox from './components/HelpBox';
 import LeftDrawer from './components/LeftDrawer';
@@ -33,7 +32,6 @@ const Container = withStyles(styles)(memo(({ classes }) => {
 const App = memo(() => {
     return (
         <SettingsProvider>
-            <CssBaseline />
             <Container />
         </SettingsProvider>
     )

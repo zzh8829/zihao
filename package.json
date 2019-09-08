@@ -12,26 +12,25 @@
     "deploy-gitlab": "yarn clean && yarn build && ./deploy/release-gitlab.sh"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/preset-env": "^7.4.1",
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
-    "@babel/register": "^7.4.0",
-    "babel-loader": "^8.0.5",
-    "browser-sync": "^2.26.3",
-    "css-loader": "^2.1.1",
-    "gulp": "^4.0.0",
-    "gulp-cli": "^2.0.1",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
-  },
-  "dependencies": {
-    "@material-ui/core": "^3.9.2",
-    "@material-ui/icons": "^3.0.2",
-    "@tweenjs/tween.js": "^17.3.0",
-    "fetch-suspense": "^1.0.2",
-    "react": "^16.8.4",
-    "react-color": "^2.17.0",
-    "react-dom": "^16.8.4"
+    "@babel/register": "^7.6.0",
+    "babel-loader": "^8.0.6",
+    "browser-sync": "^2.26.7",
+    "classnames": "^2.2.6",
+    "css-loader": "^3.2.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.2.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8",
+    "@material-ui/core": "^4.4.0",
+    "@material-ui/icons": "^4.2.1",
+    "@tweenjs/tween.js": "^18.1.2",
+    "fetch-suspense": "^1.2.0",
+    "react": "^16.9.0",
+    "react-color": "^2.17.3",
+    "react-dom": "^16.9.0"
   }
 }
