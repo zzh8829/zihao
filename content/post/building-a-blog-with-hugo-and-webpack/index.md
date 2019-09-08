@@ -35,7 +35,7 @@ title = "My New Hugo Site"
 theme = "hyde"
 ```
 
-Note: baseURL `/` is very important because hugo tries to replace all links with fixed baseUrl like `https://zihao.mefavicon.png` which in my opinion is very lame because it only works when you are loading the site from the same domain. By setting it to `/`, the static files will work everywhere regardless of domain name.
+Note: baseURL `/` is very important because hugo tries to replace all links with fixed baseUrl like `https://zihao.me/favicon.png` which in my opinion is very lame because it only works when you are loading the site from the same domain. By setting it to `/`, the static files will work everywhere regardless of domain name.
 
 ```
 hugo server -D
