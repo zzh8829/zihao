@@ -1,7 +1,7 @@
 public/
 themes/*
 !themes/cactus-plus-plus
-
+.firebase
 
 # Created by https://www.gitignore.io/api/node,macos
 

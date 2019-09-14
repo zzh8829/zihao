@@ -8,7 +8,7 @@
     "clean": "rm -rf public",
     "start": "gulp watch",
     "build": "gulp build",
-    "deploy": "yarn clean && yarn build && ./deploy/release-k8s.sh",
+    "deploy": "yarn clean && yarn build && ./deploy/release-firebase.sh",
     "deploy-gitlab": "yarn clean && yarn build && ./deploy/release-gitlab.sh"
   },
   "devDependencies": {
