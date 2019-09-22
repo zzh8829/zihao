@@ -1,6 +1,13 @@
 #craft {
-  height:100vh;
-  background-color: rgb(240,240,240);
+  height: 100vh;
+}
+
+#craft-loading {
+  position: absolute;
+  width: 10%;
+  margin-left: -5%;
+  height: 100vh;
+  left: 50%;
 }
 
 #craft-gl {
@@ -10,6 +17,7 @@
   right: 0px;
   bottom: 0px;
   user-select: none;
+  /* background-color: rgb(240, 240, 240); */
 }
 
 #craft-gl:focus {
@@ -36,7 +44,7 @@
 }
 
 .profile h2 {
-  color: #444
+  color: #444;
 }
 
 #post-list li > a {
@@ -67,33 +75,35 @@
 
 .scroll-down {
   opacity: 1;
-  transition: all .5s ease-in 3s;
+  transition: all 0.5s ease-in 3s;
 }
 
 .scroll-down {
   position: absolute;
   bottom: 30px;
   left: 50%;
-  margin-left: -16px;
+  margin-left: -1.5rem;
   display: block;
-  width: 3em;
-  height: 3em;
+  width: 3rem;
+  height: 3rem;
   border: 2px solid #555;
   background-size: 14px auto;
   border-radius: 50%;
   z-index: 2;
   animation: bounce 2s infinite;
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
 }
 
 .scroll-down:before {
   position: absolute;
-  top: calc(50% - 8px);
-  left: calc(50% - 6px);
+  left: 50%;
+  bottom: 30px;
+  margin-left: -0.5rem;
+  margin-bottom: -0.7rem;
   transform: rotate(-45deg);
   display: block;
-  width: 12px;
-  height: 12px;
+  width: 1rem;
+  height: 1rem;
   content: "";
   border: 2px solid #555;
   border-width: 0px 0 2px 2px;

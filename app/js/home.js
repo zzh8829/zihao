@@ -1,5 +1,5 @@
 import "./common";
-import Craft from './craft-gl';
+import Craft from "./craft-gl";
 import CraftUI from "./craft-ui";
 
 $(function() {
@@ -13,36 +13,49 @@ $(function() {
   });
 });
 
-let homeEnabled = true;
 const homenav = $("#home-nav");
 const blognav = $("#blog-nav");
 
-if (window.location.hash) {
-  homenav.hide();
+let homeEnabled = true;
+
+if (!window.WEBGL.isWebGLAvailable()) {
+  homeEnabled = false;
+  $("#craft").hide();
+  $("#craft-nav").hide();
+  switchMode("blog");
 } else {
-  blognav.hide();
+  $(() => {
+    window.craft = new Craft($("#craft-gl"));
+    window.craft.error = e => {
+      console.log("Craft crashed :(", e);
+      homeEnabled = false;
+      $("#craft").hide();
+      $("#craft-nav").hide();
+      switchMode("blog");
+    };
+    window.craft.run();
+    CraftUI("craft-ui");
+  });
+  switchMode("home");
 }
 
-$(() => {
-  window.craft = new Craft($("#craft-gl"));
-  window.craft.error = () => {
-    console.log('Craft crashed :(');
-    homeEnabled = false;
-    switchMode("blog");
-    $("#craft").hide();
-    $("#craft-nav").hide();
-  };
-  window.craft.run()
-  CraftUI('craft-ui')
-});
+if (window.location.hash) {
+  switchMode("blog");
+} else {
+  switchMode("home");
+}
 
 function switchMode(mode) {
+  if (!homeEnabled) {
+    mode = "blog";
+  }
+
   if (mode == "blog") {
-    blognav.css('display', 'flex');
+    blognav.css("display", "flex");
     homenav.hide();
     $('nav > a[href="#blog"]').addClass("active");
-  } else if (mode == "home" && homeEnabled) {
-    homenav.css('display', 'flex');
+  } else if (mode == "home") {
+    homenav.css("display", "flex");
     blognav.hide();
     $('nav > a[href="#blog"]').removeClass("active");
   }

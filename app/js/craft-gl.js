@@ -298,7 +298,7 @@ class Craft {
 
   run() {
     if (!WEBGL.isWebGLAvailable()) {
-      this.error();
+      this.error('webgl');
       return;
     }
 
@@ -426,7 +426,7 @@ class Craft {
       this.blocks.clear();
     });
     this.socket.on("connect_error", () => {
-      this.error();
+      this.error('socket');
     });
   }
 

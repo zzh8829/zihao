@@ -9,7 +9,7 @@
   <a href='/about'>{{ with .Site.Params.about }}{{ . }}{{ else }}About{{ end }}</a>
 </nav>
 {{ end }}
-<nav id="blog-nav" class="main-nav" >
+<nav id="blog-nav" class="main-nav">
   {{ if .IsHome }}
     <a href='#craft' class="nav-logo hide-on-mobile"> {{ with .Site.Title }}{{ . }}{{ else }}Logo{{ end }}</a>
 
