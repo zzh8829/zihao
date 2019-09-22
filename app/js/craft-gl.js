@@ -5,7 +5,7 @@ const Stats = window.Stats;
 const io = window.io;
 const $ = window.$;
 
-const NODECRAFT_BACKEND = NODECRAFT_BACKEND;
+const NODECRAFT_BACKEND = process.env.NODECRAFT_BACKEND;
 const BLOCK_SIZE = 50;
 const PLANE_SIZE = 10000;
 const BLOCK_COLOR = 0xfeb74c;
