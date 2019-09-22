@@ -1,11 +1,11 @@
-import TWEEN from '@tweenjs/tween.js';
+import TWEEN from "@tweenjs/tween.js";
 const WEBGL = window.WEBGL; // import hacks;
 const THREE = window.THREE;
 const Stats = window.Stats;
 const io = window.io;
 const $ = window.$;
 
-const NODECRAFT_BACKEND = "https://nodecraft.cloud.zihao.me";
+const NODECRAFT_BACKEND = NODECRAFT_BACKEND;
 const BLOCK_SIZE = 50;
 const PLANE_SIZE = 10000;
 const BLOCK_COLOR = 0xfeb74c;
@@ -19,7 +19,7 @@ class Blocks {
 
     // cubes
     this.cubeGeo = new THREE.BoxGeometry(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-    this.materials = {}
+    this.materials = {};
   }
 
   getMaterial(color) {
@@ -67,7 +67,8 @@ class Craft {
   constructor(rootElement) {
     this.rootElement = rootElement;
     this.clock = new THREE.Clock();
-    this.error = () => { };
+    this.onError = () => {};
+    this.onReady = () => {};
 
     this.width = null;
     this.height = null;
@@ -86,7 +87,7 @@ class Craft {
     this.angle = 0;
     this.zoom = 1;
 
-    this.props = { zoom: 1}
+    this.props = { zoom: 1 };
 
     this.removingBlock = false;
     this.addMaterial = BLOCK_COLOR;
@@ -130,7 +131,10 @@ class Craft {
           .add(intersect.face.normal)
           .divideScalar(BLOCK_SIZE)
           .floor();
-        this.insertBlock([position.x, position.y, position.z], this.addMaterial);
+        this.insertBlock(
+          [position.x, position.y, position.z],
+          this.addMaterial
+        );
       }
     }
   }
@@ -208,8 +212,8 @@ class Craft {
           if (intersect.object !== this.plane) {
             this.rollOverMesh.position.copy(intersect.object.position);
           } else {
-            this.rollOverMesh.visible = false
-          };
+            this.rollOverMesh.visible = false;
+          }
         } else {
           this.rollOverMesh.position
             .copy(intersect.point)
@@ -259,8 +263,8 @@ class Craft {
     this.camera.position.z = Math.sin(this.angle) * 700 * this.zoom;
     this.camera.lookAt(new THREE.Vector3());
 
-    $('#craft-loading').hide();
-    $('#craft-gl').css({'background-color': 'rgb(240, 240, 240)'});
+    $("#craft-loading").hide();
+    $("#craft-gl").css({ "background-color": "rgb(240, 240, 240)" });
     this.renderer.render(this.scene, this.camera);
 
     this.stats.update();
@@ -300,7 +304,7 @@ class Craft {
 
   run() {
     if (!WEBGL.isWebGLAvailable()) {
-      this.error('webgl');
+      this.onError("webgl");
       return;
     }
 
@@ -392,7 +396,6 @@ class Craft {
 
     this.connectSocket();
     this.setupEvents();
-    requestAnimationFrame(this.animate.bind(this));
 
     this.rootElement.append(this.stats.domElement);
     this.rootElement.append(this.renderer.domElement);
@@ -412,10 +415,13 @@ class Craft {
 
   connectSocket() {
     this.socket = io.connect(NODECRAFT_BACKEND);
+    this.socket.on("connect", () => {
+      requestAnimationFrame(this.animate.bind(this));
+    });
     this.socket.on("init", data => {
       this.blocks.clear();
       for (const pos of Object.keys(data)) {
-        this.blocks.insert(pos.split(',').map(Number), data[pos]);
+        this.blocks.insert(pos.split(",").map(Number), data[pos]);
       }
     });
     this.socket.on("insert", data => {
@@ -428,7 +434,7 @@ class Craft {
       this.blocks.clear();
     });
     this.socket.on("connect_error", () => {
-      this.error('socket');
+      this.onError("socket");
     });
   }
 

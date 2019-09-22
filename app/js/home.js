@@ -26,7 +26,10 @@ if (!window.WEBGL.isWebGLAvailable()) {
 } else {
   $(() => {
     window.craft = new Craft($("#craft-gl"));
-    window.craft.error = e => {
+    window.craft.onReady = () => {
+      CraftUI("craft-ui");
+    };
+    window.craft.onError = e => {
       console.log("Craft crashed :(", e);
       homeEnabled = false;
       $("#craft").hide();
@@ -34,7 +37,6 @@ if (!window.WEBGL.isWebGLAvailable()) {
       switchMode("blog");
     };
     window.craft.run();
-    CraftUI("craft-ui");
   });
   switchMode("home");
 }
