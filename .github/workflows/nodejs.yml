@@ -1,6 +1,6 @@
 name: Node CI
 
-on: 
+on:
   push:
     branches:
     - master
@@ -25,3 +25,20 @@ jobs:
         yarn install
       env:
         CI: true
+    - name: Discord Succeeded
+      uses: appleboy/discord-action@0.0.2
+      secrets:
+        - "WEBHOOK_ID"
+        - "WEBHOOK_TOKEN"
+      env:
+        COLOR: "#49C39E"
+      args: "[CI] https://zihao.me Succeeded"
+    - name: Discord Failed
+      if: failure()
+      uses: appleboy/discord-action@0.0.2
+      secrets:
+        - "WEBHOOK_ID"
+        - "WEBHOOK_TOKEN"
+      env:
+        COLOR: "#D40E0D"
+      args: "[CI] https://zihao.me Failed"
