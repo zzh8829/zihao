@@ -259,6 +259,8 @@ class Craft {
     this.camera.position.z = Math.sin(this.angle) * 700 * this.zoom;
     this.camera.lookAt(new THREE.Vector3());
 
+    $('#craft-loading').hide();
+    $('#craft-gl').css({'background-color': 'rgb(240, 240, 240)'});
     this.renderer.render(this.scene, this.camera);
 
     this.stats.update();
