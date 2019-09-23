@@ -1,4 +1,4 @@
-name: Node CI
+name: CI
 
 on:
   push:
@@ -7,24 +7,21 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-    - name: node install, build, and test
-      run: |
-        yarn install
+        node-version: 12.x
+    - name: build
+      run: yarn install && yarn build
+    - name: firebase deploy
+      uses: w9jds/firebase-action@develop
       env:
-        CI: true
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      with:
+        args: deploy
     - name: Discord Succeeded
       uses: appleboy/discord-action@0.0.2
       env:

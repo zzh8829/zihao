@@ -1,0 +1,5 @@
+— gcloud auth activate-service-account --key-file=key.json
+— gcloud config set project my-project
+— gcloud config set container/cluster my-cluster
+— gcloud config set compute/zone europe-west2-a
+— gcloud container clusters get-credentials my-cluster --zone europe-west2-a
