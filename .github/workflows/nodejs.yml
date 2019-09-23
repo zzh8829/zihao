@@ -31,7 +31,8 @@ jobs:
         WEBHOOK_ID: "${{ secrets.DISCORD_WEBHOOK_ID }}"
         WEBHOOK_TOKEN: "${{ secrets.DISCORD_WEBHOOK_TOKEN }}"
         COLOR: "#49C39E"
-      args: "[CI] https://zihao.me Succeeded"
+      with:
+        args: "[CI] https://zihao.me Succeeded"
     - name: Discord Failed
       if: failure()
       uses: appleboy/discord-action@0.0.2
@@ -39,4 +40,5 @@ jobs:
         WEBHOOK_ID: "${{ secrets.DISCORD_WEBHOOK_ID }}"
         WEBHOOK_TOKEN: "${{ secrets.DISCORD_WEBHOOK_TOKEN }}"
         COLOR: "#D40E0D"
-      args: "[CI] https://zihao.me Failed"
+      with:
+        args: "[CI] https://zihao.me Failed"
