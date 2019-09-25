@@ -8,8 +8,7 @@
     "clean": "rm -rf public",
     "start": "gulp watch",
     "build": "gulp build",
-    "deploy": "yarn clean && yarn build && ./deploy/release-firebase.sh",
-    "deploy-gitlab": "yarn clean && yarn build && ./deploy/release-gitlab.sh"
+    "deploy": "yarn clean && yarn build && ./deploy/release-firebase.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",

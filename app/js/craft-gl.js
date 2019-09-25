@@ -263,7 +263,6 @@ class Craft {
     this.camera.position.z = Math.sin(this.angle) * 700 * this.zoom;
     this.camera.lookAt(new THREE.Vector3());
 
-    $("#craft-loading").hide();
     $("#craft-gl").css({ "background-color": "rgb(240, 240, 240)" });
     this.renderer.render(this.scene, this.camera);
 
@@ -414,7 +413,7 @@ class Craft {
   }
 
   connectSocket() {
-    this.socket = io.connect(NODECRAFT_BACKEND);
+    this.socket = io.connect(NODECRAFT_BACKEND, {timeout: 3000});
     this.socket.on("connect", () => {
       requestAnimationFrame(this.animate.bind(this));
     });
@@ -423,6 +422,9 @@ class Craft {
       for (const pos of Object.keys(data)) {
         this.blocks.insert(pos.split(",").map(Number), data[pos]);
       }
+
+      $("#craft-loading").hide();
+      this.onReady()
     });
     this.socket.on("insert", data => {
       this.blocks.insert(data.pos, data.material);
@@ -433,7 +435,12 @@ class Craft {
     this.socket.on("clear", () => {
       this.blocks.clear();
     });
-    this.socket.on("connect_error", () => {
+    this.socket.on("connect_error", (e) => {
+      console.log(e)
+      this.onError("socket");
+    });
+    this.socket.on("connect_timeout", (e) => {
+      console.log(e)
       this.onError("socket");
     });
   }

@@ -1,7 +1,7 @@
 import path from "path";
 import webpack from "webpack";
 
-export default {
+export default (_env, argv) => ({
   devtool: 'source-map',
   entry: {
     home: ["./app/js/home"],
@@ -26,7 +26,8 @@ export default {
   },
   plugins: [
     new webpack.EnvironmentPlugin({
-      NODECRAFT_BACKEND: 'https://nodecraft.cloud.zihao.me'
+      NODECRAFT_BACKEND: 'https://nodecraft.cloud.zihao.me',
+      NODE_ENV: argv.mode
     })
   ]
   // optimization: {
@@ -40,4 +41,4 @@ export default {
   //     }
   //   }
   // }
-};
+});
