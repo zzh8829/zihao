@@ -413,7 +413,7 @@ class Craft {
   }
 
   connectSocket() {
-    this.socket = io.connect(NODECRAFT_BACKEND, {timeout: 3000});
+    this.socket = io.connect(NODECRAFT_BACKEND, {timeout: 1000});
     this.socket.on("connect", () => {
       requestAnimationFrame(this.animate.bind(this));
     });
