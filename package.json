@@ -11,29 +11,29 @@
     "deploy": "yarn clean && yarn build && ./deploy/release-firebase.sh"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/preset-react": "^7.6.3",
-    "@babel/register": "^7.6.2",
-    "@material-ui/core": "^4.5.1",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/register": "^7.7.7",
+    "@material-ui/core": "^4.8.2",
     "@material-ui/icons": "^4.5.1",
-    "@tweenjs/tween.js": "^18.3.1",
+    "@tweenjs/tween.js": "^18.5.0",
     "babel-loader": "^8.0.6",
     "browser-sync": "^2.26.7",
     "classnames": "^2.2.6",
-    "css-loader": "^3.2.0",
-    "fetch-suspense": "^1.2.0",
+    "css-loader": "^3.4.1",
+    "fetch-suspense": "^1.2.2",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.2.0",
-    "react": "^16.10.2",
+    "react": "^16.12.0",
     "react-color": "^2.17.3",
-    "react-dom": "^16.10.2",
-    "webpack": "^4.41.1",
-    "webpack-cli": "^3.3.9"
+    "react-dom": "^16.12.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@sentry/browser": "^5.7.0",
-    "darkmode-js": "^1.5.0"
+    "@sentry/browser": "^5.10.2",
+    "darkmode-js": "^1.5.4"
   }
 }
