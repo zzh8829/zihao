@@ -8,7 +8,6 @@ Zihao Zhang's person website powered by:
 - Webpack: JavaScript packer
 - Gulp: Build pipeline
 
-
 ---
 
 ## Mac instructions
@@ -17,12 +16,13 @@ Zihao Zhang's person website powered by:
 brew install hugo
 brew install node
 
-git submodule update --init	
+git submodule update --init
 yarn install
 yarn start
 ```
 
 ## Publish Site
+
 ```
 yarn deploy
 # or
@@ -30,6 +30,7 @@ yarn deploy-gitlab
 ```
 
 ## All Commands
+
 ```
 start           # Dev Build + Watch
 build           # Build production

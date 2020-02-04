@@ -11,7 +11,7 @@ gulp.task("build", gulp.parallel(
   () => runHugo()
 ));
 
-gulp.task("watch", () => {
+gulp.task("watch", async() => {
   runWebpack(["--mode", "development", "--watch"]);
   runHugo(["--buildDrafts", "--buildFuture", "--watch"]);
 
