@@ -33,8 +33,10 @@ You can find Zihao on [Linkedin](https://linkedin.com/in/zzh8829), [Twitter](htt
 
 Zihao is also a top ranked elite gamer with a diverse skill set. He has achieved:
 
+
 - Hearthstone: Legend Rank (North America)
 - PUBG: Top 1000 NA Squad mode
+- Valorant: Platinum Rank
 - Counter Strike (CS:GO): Legendary Eagle
 - Apex Legends: Platinum Rank
 - League of Legends: Platinum League
