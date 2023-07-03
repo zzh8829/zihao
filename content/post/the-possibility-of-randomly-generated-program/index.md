@@ -8,6 +8,7 @@ date = 2019-05-27T16:53:45-04:00
 
 I got bored today and started thinking about the possibility of randomly generating a
 valid computer program.
+
 <!--more-->
 
 If in the future when somebody actually created a program that can be called
@@ -31,6 +32,19 @@ by the rule of the universe, there is no mathematical model that can describe th
 transformation from z to z'. The reason is that AGI is already the most fundamental
 way to describe the mapping, there is no statistical or analytical model simpler than
 AGI that can explain z -> z'. Any model that approximate the transform is guaranteed to be worse than AGI in everything else.
+
+> **Update July 2023 (GPT-4)**
+>
+> it turns out Z in 2019 was extremely close at guessing what hapened 4 years later. the only miscalculation I had was discounting the fact the AGI function could actually be created.
+> And that will completely resolve the program generation equation.
+> we could easily see the mapping that
+>
+> `f(AGI(env)) -> f(z) <> f(GPT-4(context)) -> f(z)`
+>
+> `env + epsilon = env' <> context + next token = context'`
+>
+> The key break thru is that we dont need to model the translation from `z` to `z'`, which is in fact impossible. what we are really doing is given an existing state `z` what are the statisically possible **mutation** that a **human** would apply to `z`. by applying that mutation, we are **creating** `z'` instead of *predicting* it. Another way of saying this is that physics is unpredictable but human actions are very predictable.
+there are a billion ways the state `z` could change but there are very few statistically significant ways a human would do to state `z`. that is the power of largue language model.
 
 This perfectly explains why current machine learning based model is stuck in the
 uncanny valley. Because we are trying to learn the function 'f' from latent
@@ -93,4 +107,3 @@ it worked! b'<built-in function exec>\n'
 ```
 
 I predict that an intelligent system must not only be able to continuously evolve itself (like gradient descent modifying the weights), it can also modify the algorithm that modify itself (gradient descent cannot). On top of that, it must be able to modify itself at runtime (traditional programs can but neural net cannot).
-
